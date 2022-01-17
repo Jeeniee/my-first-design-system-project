@@ -1,0 +1,94 @@
+{
+  "name": "nwayplay-accounts-fe",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@craco/craco": "^6.2.0",
+    "@emotion/react": "11.4.1",
+    "@emotion/styled": "^11.3.0",
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.1.0",
+    "@testing-library/user-event": "^12.1.10",
+    "@types/amplitude-js": "^8.0.1",
+    "@types/jest": "^26.0.15",
+    "@types/node": "^12.0.0",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
+    "@types/react-router-dom": "^5.1.8",
+    "amplitude-js": "^8.8.0",
+    "axios": "^0.21.1",
+    "bignumber.js": "^9.0.1",
+    "date-fns": "^2.23.0",
+    "env-cmd": "^10.1.0",
+    "jwt-decode": "^3.1.2",
+    "react": "^17.0.2",
+    "react-device-detect": "^2.1.2",
+    "react-dom": "^17.0.2",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "4.0.3",
+    "recoil": "^0.4.0",
+    "typescript": "^4.1.2",
+    "web-vitals": "^1.0.1"
+  },
+  "scripts": {
+    "start": "env-cmd -f .env.local craco start",
+    "build:dev": "GENERATE_SOURCEMAP=false env-cmd -f .env.dev craco build",
+    "build:stage": "GENERATE_SOURCEMAP=false env-cmd -f .env.stage craco build",
+    "build:prod": "GENERATE_SOURCEMAP=false env-cmd -f .env.prod craco build",
+    "test": "craco test",
+    "eject": "react-scripts eject",
+    "storybook": "start-storybook -p 6006 -s public",
+    "build-storybook": "build-storybook -s public"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ],
+    "overrides": [
+      {
+        "files": [
+          "**/*.stories.*"
+        ],
+        "rules": {
+          "import/no-anonymous-default-export": "off"
+        }
+      },
+      {
+        "files": [
+          "**/*.stories.*"
+        ],
+        "rules": {
+          "import/no-anonymous-default-export": "off"
+        }
+      }
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@emotion/babel-preset-css-prop": "^11.2.0",
+    "@storybook/addon-actions": "^6.3.7",
+    "@storybook/addon-essentials": "^6.3.7",
+    "@storybook/addon-links": "^6.3.7",
+    "@storybook/node-logger": "^6.3.7",
+    "@storybook/preset-create-react-app": "^3.2.0",
+    "@storybook/react": "^6.3.7",
+    "autoprefixer": "^9",
+    "postcss": "^7",
+    "webpack-merge": "^5.8.0"
+  },
+  "resolutions": {
+    "babel-loader": "8.1.0"
+  }
+}

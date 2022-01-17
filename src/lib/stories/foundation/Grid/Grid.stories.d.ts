@@ -1,0 +1,7 @@
+import { ComponentStory, ComponentMeta } from "@storybook/react";
+declare const _default: ComponentMeta<({ alignContent, alignItems, container, direction, item, justifyContent, wrap, spacing, children, ...props }: import("@src/stories/foundation/Grid").GridProps) => import("@emotion/react/jsx-runtime").JSX.Element>;
+export default _default;
+export declare const Spacing: ComponentStory<({ alignContent, alignItems, container, direction, item, justifyContent, wrap, spacing, children, ...props }: import("@src/stories/foundation/Grid").GridProps) => import("@emotion/react/jsx-runtime").JSX.Element>;
+export declare const BasicGrid: ComponentStory<({ alignContent, alignItems, container, direction, item, justifyContent, wrap, spacing, children, ...props }: import("@src/stories/foundation/Grid").GridProps) => import("@emotion/react/jsx-runtime").JSX.Element>;
+export declare const GridWithBreakpoints: ComponentStory<({ alignContent, alignItems, container, direction, item, justifyContent, wrap, spacing, children, ...props }: import("@src/stories/foundation/Grid").GridProps) => import("@emotion/react/jsx-runtime").JSX.Element>;
+export declare const Interactive: ComponentStory<({ alignContent, alignItems, container, direction, item, justifyContent, wrap, spacing, children, ...props }: import("@src/stories/foundation/Grid").GridProps) => import("@emotion/react/jsx-runtime").JSX.Element>;

@@ -1,0 +1,27 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      - echo Entered the install phase...
+      - npm install -g yarn
+      - yarn
+      - yarn install
+    finally:
+      - echo This always runs even if the update or install command fails
+  pre_build:
+    commands:
+      # - ./build_start.sh # slack 알림
+  build:
+    commands:
+      - echo Entered the build phase...
+      - yarn build:prod
+    finally:
+      - echo This always runs even if the install command fails
+      - echo $CODEBUILD_SRC_DIR
+  post_build:
+    commands:
+      # - aws s3 sync ./build s3://nwayplay-accounts-fe-prod # s3에 dist 폴더 내부의 파일들을 업로드함
+      # - aws s3 cp ./build/index.html s3://nwayplay-accounts-fe-prod --cache-control "no-cache, no-store, must-revalidate, max-age=0" --expires 0
+      # - aws cloudfront create-invalidation --distribution-id E270WESS0ZRXA4 --paths "/*" # cloudfront invalidation
+      # - ./build_end.sh # slack 알림

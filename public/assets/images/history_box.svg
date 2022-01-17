@@ -1,0 +1,8 @@
+<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+<circle cx="20" cy="20" r="20" fill="black"/>
+<path d="M8 12L20 17V33L8 27V12Z" fill="#E5E7EB"/>
+<path d="M8 12L20 8L32 12L20 17L8 12Z" fill="white"/>
+<path d="M32 12L20 17V33L32 27V12Z" fill="#9CA3AF"/>
+<path d="M8 17L20 22V24L8 19V17Z" fill="#C8CDD7"/>
+<path d="M20 22L32 17V19L20 24V22Z" fill="#808896"/>
+</svg>

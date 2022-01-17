@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>We're under maintenance, sorry.</title>
+
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap");
+      @import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
+
+      html {
+        height: 100%;
+      }
+
+      .maintenance-body {
+        background-image: url(assets/images/bg-maintenance.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+      }
+
+      .items-container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        max-width: 600px;
+        margin: auto;
+      }
+
+      .nway-logo-container .logo-img {
+        display: block;
+        margin: 0 auto 30px;
+        max-width: 100%;
+      }
+
+      .gears-image-container .gears-image__image {
+        display: block;
+        margin: 80px auto;
+        max-width: 45%;
+      }
+
+      .maintenance__title {
+        font-family: "Oswald", sans-serif;
+        font-size: 67px;
+        font-weight: 700;
+        text-align: center;
+        margin: 0 auto 20px;
+      }
+
+      .maintenance__subtitle {
+        font-family: "Oswald", sans-serif;
+        font-size: 32px;
+        font-weight: 700;
+        text-align: center;
+        margin: 0 auto 20px;
+        line-height: 1.1em;
+        padding: 0 10px;
+      }
+
+      .maintenance__paragraph {
+        font-family: "Open Sans", sans-serif;
+        font-size: 16px;
+        font-weight: 400;
+        text-align: center;
+        margin: 0 auto 20px;
+      }
+
+      .maintenance__paragraph a {
+        text-decoration: none;
+        color: #1892f0;
+      }
+
+      .btn-container {
+        display: block;
+        margin: 45px auto 25px;
+        text-align: center;
+      }
+
+      .btn-container .go-back__button {
+        background-color: #1892f0;
+        font-family: "Oswald", sans-serif;
+        font-size: 14px;
+        padding: 10px 35px;
+        text-transform: uppercase;
+        color: #ffffff;
+        letter-spacing: 2px;
+        border: none;
+      }
+    </style>
+  </head>
+
+  <body class="maintenance-body">
+    <div class="items-container">
+      <div class="nway-logo-container">
+        <img
+          class="logo-img"
+          src="assets/images/bi_nwayplay_horizontal_color_1.svg"
+        />
+      </div>
+      <div class="gears-image-container">
+        <img class="gears-image__image" src="assets/images/gears.png" />
+      </div>
+      <h2 class="maintenance__subtitle">We'll be back soon.</h2>
+      <p class="maintenance__paragraph">
+        Our website is currently under maintenance. <br />Check out
+        <a href="https://twitter.com/nWayPlayNFT" target="_blank"
+          >nWayPlayNFT</a
+        >
+        for the latest updates.<br />
+        Check out the website status
+        <a href="https://status.nwayplay.com" target="_blank">here</a>.
+      </p>
+    </div>
+  </body>
+</html>
