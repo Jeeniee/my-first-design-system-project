@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import { useRecoilValue } from "recoil";
-import { prevRouteNameState } from "../store";
+import { prevRouteNameState } from "store";
 
 export function useHistoryBack() {
   const history = useHistory();

@@ -1,5 +1,5 @@
 import amplitude from "amplitude-js";
-import configs from "../configs";
+import configs from "configs";
 import {
   isMobile,
   osName,

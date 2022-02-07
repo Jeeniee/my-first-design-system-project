@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import { useRecoilValue } from "recoil";
-import { viewNavigationState } from "../../../store";
-import GlobalNavigationBar from "../GlobalNavigationBar";
+import { viewNavigationState } from "store";
+import GlobalNavigationBar from "stories/components/GlobalNavigationBar";
 import * as styles from "./styles";
 
 const Layout = ({ children }: { children: ReactNode }) => {

@@ -1,6 +1,6 @@
 import React from "react";
 import { useRecoilValue } from "recoil";
-import { viewNavigationState } from "../../../store";
+import { viewNavigationState } from "store";
 import { BodyContainer } from "./styles";
 
 const PageBody = ({

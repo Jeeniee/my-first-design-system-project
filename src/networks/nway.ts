@@ -1,9 +1,9 @@
 import axios from "axios";
-import configs from "../configs";
-import { getAuthorization } from "../utils";
-import { getJWTPayload } from "../utils/auth";
-import { CookieName } from "../utils/cookie";
-import CookieManager from "../utils/CookieManager";
+import configs from "configs";
+import { getAuthorization } from "utils";
+import { getJWTPayload } from "utils/auth";
+import { CookieName } from "utils/cookie";
+import CookieManager from "utils/CookieManager";
 
 // {error:{num: int, text: string}, accessToken: string}
 export interface NwayAPIResponse {

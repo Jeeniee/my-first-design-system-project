@@ -12,12 +12,12 @@ import {
   ButtonSize,
   alignContentType,
   Spacer,
-} from "../../../lib";
-import { CookieName } from "../../../utils/cookie";
-import constants from "../../../constants";
-import CookieManager from "../../../utils/CookieManager";
+} from "lib";
+import { CookieName } from "utils/cookie";
+import constants from "constants";
+import CookieManager from "utils/CookieManager";
 import { useRecoilValue } from "recoil";
-import configs from "../../../configs";
+import configs from "configs";
 import * as styles from "./styles";
 import { useEffect, useState } from "react";
 

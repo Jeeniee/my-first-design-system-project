@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { foundation } from "../../../lib";
+import { foundation } from "lib";
 
 const CardStyle = css`
   border-radius: ${foundation.theme.spacing * 4}px;

@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { foundation } from "../../../lib";
+import { foundation } from "lib";
 
 const PageHeaderStyle = (
   isMobileView: boolean,

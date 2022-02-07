@@ -5,9 +5,9 @@ import {
   Typography,
   TypoVariant,
   wrapType,
-} from "../../lib";
+} from "lib";
 
-import PageBody from "../../stories/components/PageBody";
+import PageBody from "stories/components/PageBody";
 
 const Page = () => {
   return (

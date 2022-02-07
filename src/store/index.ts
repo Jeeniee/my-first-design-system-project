@@ -1,5 +1,5 @@
 import { atom, GetRecoilValue, selectorFamily } from "recoil";
-import { System } from "../types";
+import { System } from "types";
 
 const systemState = atom({
   key: "systemState",

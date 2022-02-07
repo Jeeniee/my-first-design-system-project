@@ -1,11 +1,11 @@
-import { foundation, Typography } from "../../lib";
+import { foundation, Typography } from "lib";
 import { useRecoilValue } from "recoil";
 import { Fragment } from "react";
-import Card from "../../stories/components/Card";
-import PageBody from "../../stories/components/PageBody";
-import PageHeader from "../../stories/components/PageHeader";
+import Card from "stories/components/Card";
+import PageBody from "stories/components/PageBody";
+import PageHeader from "stories/components/PageHeader";
 import * as styles from "./styles";
-import { viewNavigationState } from "../../store";
+import { viewNavigationState } from "store";
 
 const Page = () => {
   const layoutState = useRecoilValue<{

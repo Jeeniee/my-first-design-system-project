@@ -1,5 +1,5 @@
 import jwt_decode from "jwt-decode";
-import configs from "../configs";
+import configs from "configs";
 import { CookieName, getCookie, eraseCookie } from "./cookie";
 
 export default class CookieManager {

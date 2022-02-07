@@ -1,8 +1,8 @@
 import { Redirect, Switch } from "react-router-dom";
 import { Route } from "react-router-dom";
 
-import HomePage from "../pages/home";
-import NotPage from "../pages/404";
+import HomePage from "pages/home";
+import NotPage from "pages/404";
 
 const pageRoutes = {
   HOME: "/", // home page

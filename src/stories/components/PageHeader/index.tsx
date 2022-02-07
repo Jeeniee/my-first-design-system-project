@@ -9,14 +9,14 @@ import {
   KeyboardArrowLeftIcon,
   Typography,
   wrapType,
-} from "../../../lib";
+} from "lib";
 import { useRecoilValue } from "recoil";
-import configs from "../../../configs";
-import { useHistoryBack } from "../../../hooks";
-import { viewNavigationState } from "../../../store";
-import { CookieName } from "../../../utils/cookie";
-import CookieManager from "../../../utils/CookieManager";
-import Container from "../Container";
+import configs from "configs";
+import { useHistoryBack } from "hooks";
+import { viewNavigationState } from "store";
+import { CookieName } from "utils/cookie";
+import CookieManager from "utils/CookieManager";
+import Container from "stories/components/Container";
 import * as styles from "./styles";
 
 const PageHeader = ({

@@ -1,4 +1,4 @@
-import configs from "../configs";
+import configs from "configs";
 
 // enum CookieName {
 //     NWAYPLAY_AUTH_TOKEN = `${configs.ENV}_NWAYPLAY_AUTH_TOKEN`,

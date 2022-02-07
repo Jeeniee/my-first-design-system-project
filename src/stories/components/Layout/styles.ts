@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { foundation } from "../../../lib";
+import { foundation } from "lib";
 
 // 변수 소문자로 바꾸기
 

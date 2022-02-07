@@ -1,9 +1,9 @@
 import axios, { AxiosResponse } from "axios";
-import configs from "../configs";
-import { convertQueryStr, getAuthorization } from "../utils";
-import { getJWTPayload } from "../utils/auth";
-import { CookieName } from "../utils/cookie";
-import CookieManager from "../utils/CookieManager";
+import configs from "configs";
+import { convertQueryStr, getAuthorization } from "utils";
+import { getJWTPayload } from "utils/auth";
+import { CookieName } from "utils/cookie";
+import CookieManager from "utils/CookieManager";
 
 export interface BackendAPIResponse {
   success: boolean;
