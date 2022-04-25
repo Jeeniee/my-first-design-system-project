@@ -1,0 +1,88 @@
+name: deployment
+on:
+  push:
+    branches: [=dev, =stage, =master]
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    env:
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+    steps:
+      - uses: act10ns/slack@v1
+        with:
+          status: starting
+          channel: "#nwayplay-fe-build"
+        if: always()
+
+      - uses: actions/checkout@v2
+
+      - name: set build env
+        id: set-env
+        run: |
+          if [[ $GITHUB_REF == 'refs/heads/dev' ]]; then
+            echo "S3_BUCKET_NAME=nwayplay-accounts-fe-dev" >> $GITHUB_ENV
+            echo "BUILD_COMMAND=dev" >> $GITHUB_ENV
+            echo "CLOUDFRONT_DIST_ID=${{ secrets.CLOUDFRONT_DEV_DIST_ID }}" >> $GITHUB_ENV
+            echo "BUCKET_REGION=us-east-2" >> $GITHUB_ENV
+          elif [[ $GITHUB_REF == 'refs/heads/stage' ]]; then
+            echo "S3_BUCKET_NAME=nwayplay-accounts-fe-stage" >> $GITHUB_ENV
+            echo "BUILD_COMMAND=stage" >> $GITHUB_ENV
+            echo "CLOUDFRONT_DIST_ID=${{ secrets.CLOUDFRONT_STAGE_DIST_ID }}" >> $GITHUB_ENV
+            echo "BUCKET_REGION=us-east-1" >> $GITHUB_ENV
+          else 
+            echo "S3_BUCKET_NAME=nwayplay-accounts-fe-prod" >> $GITHUB_ENV
+            echo "BUILD_COMMAND=prod" >> $GITHUB_ENV
+            echo "CLOUDFRONT_DIST_ID=${{ secrets.CLOUDFRONT_PROD_DIST_ID }}" >> $GITHUB_ENV
+            echo "BUCKET_REGION=us-east-1" >> $GITHUB_ENV
+          fi
+
+      - name: restore cache
+        uses: actions/cache@v2
+        id: restore-cache
+        with:
+          path: |
+            **/node_modules
+          key: ${{ runner.os }}-nwayplay-accounts-fe-${{ env.BUILD_COMMAND }}-${{ hashFiles('**/yarn.lock') }}
+
+      - name: Install dependencies
+        id: install-dependencies
+        if: steps.restore-cache.outputs.cache-hit != 'true'
+        run: |
+          touch .npmrc
+          echo -e "@nwaycorp:registry=https://npm.pkg.github.com\n\n_authToken=${{ secrets.GH_TOKEN }}\nalways-auth=true" >> .npmrc
+          yarn
+
+      - name: Build
+        id: build
+        run: |
+          yarn build:${{ env.BUILD_COMMAND }}
+        env:
+          CI: false
+
+      - name: set aws credential
+        uses: aws-actions/configure-aws-credentials@v1
+        id: set-aws-cred
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.BUCKET_REGION }}
+
+      - name: Deploy
+        id: deploy
+        run: |
+          aws s3 sync ./build s3://${{ env.S3_BUCKET_NAME }}
+          aws s3 cp ./build/index.html s3://${{ env.S3_BUCKET_NAME }} --cache-control "no-cache, no-store, must-revalidate, max-age=0" --expires 0
+
+      - name: cloudfront invalidation
+        id: cloudfront-invalidation
+        run: |
+          aws cloudfront create-invalidation --distribution-id ${{ env.CLOUDFRONT_DIST_ID }} --paths "/*"
+
+      - uses: act10ns/slack@v1
+        with:
+          status: ${{ job.status }}
+          steps: ${{ toJson(steps) }}
+          channel: "#nwayplay-fe-build"
+          config: .github/config/slack.yml
+        if: always()
