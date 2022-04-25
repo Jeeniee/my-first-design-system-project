@@ -1,8 +1,7 @@
-import { css } from "@emotion/react";
+import styled from "@emotion/styled";
+import { ThemeOptions } from "@nwaycorp/nwayplay-designsystem-fe";
 
-const BodyContainer = (isMobileView: boolean) => css`
-  width: ${isMobileView ? "100vw" : "calc(100vw - 200px)"};
-  height: calc(100vh - 64px);
+export const StyledSampleDiv = styled.div`
+  background: ${({ theme }: { theme: ThemeOptions }) =>
+    theme.colors.primary[500]};
 `;
-// overflow: auto;
-export { BodyContainer };

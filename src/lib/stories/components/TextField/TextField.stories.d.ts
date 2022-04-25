@@ -1,4 +1,0 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react';
-declare const _default: ComponentMeta<({ variant, type, title, id, inputMode, helperText, placeHolder, defaultValue, error, errorText, disabled, onChange, onInput, onFocus, pattern, autocomplete, readonly, onKeyUp, onKeyDown, onKeyPress, maxlength, sign, contenteditable, textAlign, ...props }: import("@src/stories/components/TextField").TextFieldProps) => import("@emotion/react/jsx-runtime").JSX.Element>;
-export default _default;
-export declare const Default: ComponentStory<({ variant, type, title, id, inputMode, helperText, placeHolder, defaultValue, error, errorText, disabled, onChange, onInput, onFocus, pattern, autocomplete, readonly, onKeyUp, onKeyDown, onKeyPress, maxlength, sign, contenteditable, textAlign, ...props }: import("@src/stories/components/TextField").TextFieldProps) => import("@emotion/react/jsx-runtime").JSX.Element>;
