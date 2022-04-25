@@ -8,6 +8,8 @@ import { StyledSampleDiv } from "./styles";
 const Page = () => {
   const theme = useTheme();
 
+  console.log("1");
+
   return (
     <Grid2 outer>
       <Grid2 container>
