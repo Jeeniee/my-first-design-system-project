@@ -1925,10 +1925,10 @@
     mkdirp "^1.0.4"
     rimraf "^3.0.2"
 
-"@nwaycorp/nwayplay-designsystem-fe@0.2.11":
-  version "0.2.11"
-  resolved "https://npm.pkg.github.com/download/@nwaycorp/nwayplay-designsystem-fe/0.2.11/c798e8d6798524c6391a90b8719af3519735a44bb610817807c008a3599fe86a#cbd239e795b230387fa2ddb1d2771e4d8988f801"
-  integrity sha512-Ed2NuVwSy59gCQ7jphvSJbewWiZeeDT/g2uJEbGiKSgfbvMSD/RPm5+1fWbiFwWRmX9cOUMomvnCnCLDl2mYFQ==
+"@nwaycorp/nwayplay-designsystem-fe@^0.0.17-beta":
+  version "0.0.17-beta"
+  resolved "https://npm.pkg.github.com/download/@nwaycorp/nwayplay-designsystem-fe/0.0.17-beta/eb545e2820bcff6ad1b2e72f7133f713d201b60fba95a6f9f9da38ce47a6339a#ea0e3294d17ed24e4bd42aaf4ab3dbafacc4e19f"
+  integrity sha512-zRIPikVv8iTtkUPXNBOnjJOGCQ0wm17j+5IVQslSvA5ZMTgvWJaGeJzurgLYho11eQxqo5DfS+FKNprb/lqVnQ==
   dependencies:
     rollup-plugin-ts "^2.0.7"
 
@@ -14503,10 +14503,8 @@ watchpack@^1.7.4:
   resolved "https://registry.yarnpkg.com/watchpack/-/watchpack-1.7.5.tgz#1267e6c55e0b9b5be44c2023aed5437a2c26c453"
   integrity sha512-9P3MWk6SrKjHsGkLT2KHXdQ/9SNkyoJbabxnKOoJepsvJjJG8uYTR3yTPxPQvNDI3w4Nz1xnE0TLHK4RIVe/MQ==
   dependencies:
-    chokidar "^3.4.1"
     graceful-fs "^4.1.2"
     neo-async "^2.5.0"
-    watchpack-chokidar2 "^2.0.1"
   optionalDependencies:
     chokidar "^3.4.1"
     watchpack-chokidar2 "^2.0.1"

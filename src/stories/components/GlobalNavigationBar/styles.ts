@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { Box, ThemeOptions } from "@nwaycorp/nwayplay-designsystem-fe";
 
 export const StyledHeader = styled.header`
   position: fixed;
@@ -9,4 +10,13 @@ export const StyledHeader = styled.header`
   padding: 20px 0px;
   background: white;
   border: 1px solid black;
+`;
+
+export const StyledBox = styled(Box)<{ theme: ThemeOptions }>`
+  ${({ theme }) => `
+    width: fit-content;
+    padding: ${theme.spacing[200]}px;
+    border: 2px solid ${theme.colors.info};
+    border-radius: 8px;
+  `}
 `;
