@@ -1925,10 +1925,10 @@
     mkdirp "^1.0.4"
     rimraf "^3.0.2"
 
-"@nwaycorp/nwayplay-designsystem-fe@^0.0.18-beta":
-  version "0.0.18-beta"
-  resolved "https://npm.pkg.github.com/download/@nwaycorp/nwayplay-designsystem-fe/0.0.18-beta/01a47021b108e929314b80544957accae4447b826aae68ace86ef1d95c6e4927#e0570351a82670f37dde4f149da0086bcd53a95c"
-  integrity sha512-DFNQ43cadwMcEdqGguTmA5i1JEo5MZSZYtIXAtiKPfWxRwUrT4oFb07+uSriWnBCgmcifmmE6GHy3ESaYW/GvQ==
+"@nwaycorp/nwayplay-designsystem-fe@^0.0.20-beta":
+  version "0.0.20-beta"
+  resolved "https://npm.pkg.github.com/download/@nwaycorp/nwayplay-designsystem-fe/0.0.20-beta/a83dc58e0737b28e9d754ce2e0d3cceba866ff76d8b404f46769ef65db5151da#78ee7024fa25e53f18ee4fcb9cb9ec823aad1e41"
+  integrity sha512-/JVlTLMd96IjRfsrdW4Br46G1tEJP+R49hPcb4lasJV9wFEtEKcHzd7hJgD2e4F7DCn8+qWhfHxyesvS2wQMvw==
   dependencies:
     rollup-plugin-ts "^2.0.7"
 
