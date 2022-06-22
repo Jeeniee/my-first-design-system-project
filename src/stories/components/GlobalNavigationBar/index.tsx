@@ -8,7 +8,7 @@ import {
   useTheme,
 } from "@nwaycorp/nwayplay-designsystem-fe";
 import { StyledHeader } from "./styles";
-import { Fragment, RefObject } from "react";
+import { Fragment } from "react";
 import { ReactComponent as NwayNewLogo } from "../../../assets/icons/logo_nway.svg";
 
 const GlobalNavigationBar = () => {
