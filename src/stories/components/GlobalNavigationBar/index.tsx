@@ -2,12 +2,14 @@ import { Link } from "react-router-dom";
 import configs from "../../../configs";
 import {
   Grid,
+  Icon,
   Stack,
   Typography,
   useTheme,
 } from "@nwaycorp/nwayplay-designsystem-fe";
-import { StyledBox, StyledHeader } from "./styles";
-import { Fragment } from "react";
+import { StyledHeader } from "./styles";
+import { Fragment, RefObject } from "react";
+import { ReactComponent as NwayNewLogo } from "../../../assets/icons/logo_nway.svg";
 
 const GlobalNavigationBar = () => {
   const theme = useTheme();
@@ -19,7 +21,9 @@ const GlobalNavigationBar = () => {
             <Grid xs={12} item>
               <Stack direction="row" spacing="200" alignItems="center">
                 <a href={configs.NWAYPLAY_DOMAIN || "/"}>
-                  <img src={"/assets/images/logo_nway_new.svg"} alt="" />
+                  <Icon size={37}>
+                    <NwayNewLogo />
+                  </Icon>
                 </a>
                 <Link to="/">
                   <Typography

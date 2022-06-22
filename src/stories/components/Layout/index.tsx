@@ -1,11 +1,14 @@
-import { Fragment, ReactNode } from "react";
+import { Fragment, ReactNode, useEffect, useRef, useState } from "react";
+import Footer from "../Footer";
 import GlobalNavigationBar from "../GlobalNavigationBar";
+import Main from "../Main";
 
 const Layout = ({ children }: { children: ReactNode }) => {
   return (
     <Fragment>
       <GlobalNavigationBar />
-      <main>{children}</main>
+      <Main>{children}</Main>
+      <Footer />
     </Fragment>
   );
 };
