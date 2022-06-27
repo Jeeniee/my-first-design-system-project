@@ -2,7 +2,6 @@ import {
   Button,
   Grid,
   Image,
-  Modal,
   Spacer,
   Stack,
   Typography,
@@ -10,15 +9,7 @@ import {
 } from "@nwaycorp/nwayplay-designsystem-fe";
 import { Fragment, useState } from "react";
 import { useRecoilState } from "recoil";
-import {
-  colorState,
-  genreState,
-  listAtom,
-  personalityState,
-  resultDataList,
-  userFormState,
-} from "store/index";
-import QuestionTemplate from "stories/components/QuestionTemplate";
+import { surveyList } from "store/index";
 import SurveyModal from "stories/components/surveyModal";
 import {
   StyledSampleDiv,
@@ -29,15 +20,10 @@ import {
 
 const Page = () => {
   const theme = useTheme();
-
-  const [form, setForm] = useRecoilState(userFormState);
-  const [genre, setGenre] = useRecoilState(genreState);
-  const [color, setColor] = useRecoilState(colorState);
-  const [personality, setPersonality] = useRecoilState(personalityState);
-  const listAtomArray = useRecoilState(listAtom);
-
   const [showModal, setShowModal] = useState<boolean>(false);
   // 이 페이지에서만 말고, 다른페이지에서도 눌렀을 때 나와야하니까 위치를 어딘가로 옮겨야겠지
+
+  const resultList = useRecoilState(surveyList);
 
   return (
     <Fragment>
@@ -86,12 +72,17 @@ const Page = () => {
             </SurveyBox>
           </StyledSampleDiv3>
           <StyledSampleDiv theme={theme}>
-            {listAtomArray?.length > 0 &&
+            {/* {listAtomArray?.length > 0 &&
               listAtomArray?.map((item) => (
                 <Stack direction="row" background="pink">
                   <Typography variant="body4">user email</Typography>
                 </Stack>
-              ))}
+              ))} */}
+            {resultList?.map((item) => (
+              <Stack direction="row" background="pink">
+                <Typography variant="body4">{item}</Typography>
+              </Stack>
+            ))}
           </StyledSampleDiv>
         </Grid>
       </Grid>

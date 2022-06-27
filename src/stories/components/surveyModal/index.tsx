@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import {
   Button,
   Grid,
@@ -5,7 +6,6 @@ import {
   Spacer,
   Stack,
 } from "@nwaycorp/nwayplay-designsystem-fe";
-import { useState } from "react";
 import QuestionTemplate from "../QuestionTemplate";
 
 interface ISurveyList {
@@ -13,6 +13,33 @@ interface ISurveyList {
   options: string[];
   type: "toggle" | "radio" | "serial" | "input" | "rate";
 }
+
+export const GENRE_LIST = [
+  {
+    value: "HORROR",
+    icon: <></>,
+  },
+  {
+    value: "COMEDY",
+    icon: <></>,
+  },
+  {
+    value: "Sci-Fi",
+    icon: <></>,
+  },
+  {
+    value: "ROMANCE",
+    icon: <></>,
+  },
+  {
+    value: "ACTION",
+    icon: <></>,
+  },
+  {
+    value: "ANIMATION",
+    icon: <></>,
+  },
+];
 
 export const SURVEY_LIST: ISurveyList[] = [
   { question: "영화 장르 고르기", options: [], type: "toggle" },
@@ -71,7 +98,7 @@ const SurveyModal = ({ open }: { open: boolean }) => {
       size="m"
     >
       <Grid outer>
-        <QuestionTemplate step={step} />
+        <QuestionTemplate options={[]} step={0} type={"toggle"} />
       </Grid>
     </Modal>
   );

@@ -10,14 +10,7 @@ import {
 } from "@nwaycorp/nwayplay-designsystem-fe";
 import { Fragment, useState } from "react";
 import { useRecoilState } from "recoil";
-import {
-  colorState,
-  genreState,
-  listAtom,
-  personalityState,
-  resultDataList,
-  userFormState,
-} from "store/index";
+import {} from "store/index";
 import QuestionTemplate from "stories/components/QuestionTemplate";
 import {
   StyledSampleDiv,
@@ -53,12 +46,12 @@ const Page = () => {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [step, setStep] = useState<number>(1);
 
-  const [form, setForm] = useRecoilState(userFormState);
-  const [genre, setGenre] = useRecoilState(genreState);
-  const [color, setColor] = useRecoilState(colorState);
-  const [personality, setPersonality] = useRecoilState(personalityState);
+  // const [form, setForm] = useRecoilState(userFormState);
+  // const [genre, setGenre] = useRecoilState(genreState);
+  // const [color, setColor] = useRecoilState(colorState);
+  // const [personality, setPersonality] = useRecoilState(personalityState);
 
-  const listAtomArray = useRecoilState(listAtom);
+  // const listAtomArray = useRecoilState(listAtom);
 
   const handlePrev = () => {
     setStep((prev) => prev - 1);
@@ -76,6 +69,7 @@ const Page = () => {
     console.log("submit");
     setShowModal(false);
   };
+  return <></>;
   return (
     <Fragment>
       <Grid container>
@@ -123,12 +117,12 @@ const Page = () => {
             </SurveyBox>
           </StyledSampleDiv3>
           <StyledSampleDiv theme={theme}>
-            {listAtomArray?.length > 0 &&
+            {/* {listAtomArray?.length > 0 &&
               listAtomArray?.map((item) => (
                 <Stack direction="row" background="pink">
                   <Typography variant="body4">user email</Typography>
                 </Stack>
-              ))}
+              ))} */}
           </StyledSampleDiv>
         </Grid>
       </Grid>
@@ -151,11 +145,11 @@ const Page = () => {
         size="m"
       >
         <Grid outer>
-          <QuestionTemplate step={step} />
+          {/* <QuestionTemplate step={step} /> */}
         </Grid>
       </Modal>
     </Fragment>
   );
 };
 
-export default Page;
+// export default Page;
