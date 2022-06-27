@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { ChangeEvent, Fragment, useState } from "react";
 
 import {
   Box,
@@ -19,6 +19,7 @@ import { useToggle } from "hooks/useToggle";
 import { FormRadio } from "../FormRadio";
 import { FormToggle } from "../FormToggle";
 import { useTextField } from "hooks/useTextField";
+import { userFormState } from "store/";
 
 export const GENRE_LIST = [
   {
@@ -61,7 +62,13 @@ const StyledFormGroup = ({ type, options }: IStyledFormGroup) => {
   const { textValue, setTextValue } = useTextField();
 
   const [feeling, setFeeling] = useState<"happy" | "gloomy" | undefined>();
-  console.log("-0-=-0=-0=-0", selectedValue, checkedValue, typedValue);
+  console.log(
+    "-0-=-0=-0=-0",
+    selectedValue,
+    checkedValue,
+    typedValue,
+    textValue
+  );
 
   const theme = useTheme();
   return type === "toggle" ? (
@@ -76,14 +83,17 @@ const StyledFormGroup = ({ type, options }: IStyledFormGroup) => {
     <Stack alignItems="flex-start">
       <Stack direction="row" alignItems="flex-end">
         <TextField
-          label="Name"
+          label="name"
           id="name"
           placeHolder="Jeenie"
           type="text"
           defaultValue={textValue.name}
-          onChange={({ value }: { value: string }) =>
-            setTextValue((prev) => ({ ...prev, name: value }))
+          onChange={(e: ChangeEvent<HTMLInputElement>) =>
+            setTextValue((prev) => ({ ...prev, name: e.target.value }))
           }
+          // onChange={({ value }: { value: string }) =>
+          //   setTextValue((prev) => ({ ...prev, name: value }))
+          // }
         />
         <Spacer x={"500"} />
         <Typography variant="body9" color={theme.colors.error}>
@@ -92,19 +102,22 @@ const StyledFormGroup = ({ type, options }: IStyledFormGroup) => {
       </Stack>
       <Stack direction="row" alignItems="flex-end">
         <TextField
-          label="Email"
+          label="email"
+          id="email"
+          placeHolder="hajin.park@nway.com"
+          type="email"
           asset={
             <Button color="gray" shape="round" size="s" variant="outline">
               Varify
             </Button>
           }
-          id="email"
-          placeHolder="hajin.park@nway.com"
-          type="email"
           defaultValue={textValue.email}
-          onChange={({ value }: { value: string }) =>
-            setTextValue((prev) => ({ ...prev, email: value }))
+          onChange={(e: ChangeEvent<HTMLInputElement>) =>
+            setTextValue((prev) => ({ ...prev, email: e.target.value }))
           }
+          // onChange={({ value }: { value: string }) =>
+          //   setTextValue((prev) => ({ ...prev, name: value }))
+          // }
         />
         <Spacer x={"500"} />
         <Typography variant="body9" color={theme.colors.error}>
@@ -138,7 +151,7 @@ const StyledFormGroup = ({ type, options }: IStyledFormGroup) => {
                 shape="round"
                 size="s"
                 variant="outline"
-                onClick={() => {
+                onClick={(e) => {
                   setFeeling("gloomy");
                   setTextValue((prev) => ({
                     ...prev,
@@ -154,26 +167,15 @@ const StyledFormGroup = ({ type, options }: IStyledFormGroup) => {
           id="feeling"
           placeHolder="How's your day?"
           type="text"
-          defaultValue={textValue.email}
-          onChange={({ value }: { value: string }) =>
-            setTextValue((prev) => ({ ...prev, email: value }))
+          defaultValue={textValue.todays_feeling}
+          onChange={(e: ChangeEvent<HTMLInputElement>) =>
+            setTextValue((prev) => ({
+              ...prev,
+              todays_feeling: e.target.value,
+            }))
           }
         />
         <Spacer x={"500"} />
-        <Typography
-          variant="body9"
-          color={
-            feeling === "happy"
-              ? theme.colors.primary[500]
-              : theme.colors.gray[500]
-          }
-        >
-          {feeling === "happy"
-            ? "I'm happy for you! XD"
-            : feeling === "gloomy"
-            ? "I wish you well ;)"
-            : "How way your day?"}
-        </Typography>
         <Typography
           variant="body9"
           color={

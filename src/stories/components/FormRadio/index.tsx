@@ -6,7 +6,7 @@ import {
 import React, { Fragment } from "react";
 
 interface FormRadioProps {
-//   question: string;
+  //   question: string;
   options: string[];
   value: string | undefined | null;
   onChange: (value: string | undefined | null) => void;
@@ -15,8 +15,9 @@ interface FormRadioProps {
 export const FormRadio = ({ options, value, onChange }: FormRadioProps) => {
   return (
     <FormGroup row>
-      {options.map((text, optionIndex) => (
+      {options.map((text, index) => (
         <FormControlLabel
+          key={`${index}_${text}`}
           control={<Radio value={text} onChange={() => onChange(text)} />}
           label={text}
           checked={value === text}
