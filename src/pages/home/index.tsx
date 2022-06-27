@@ -9,6 +9,8 @@ import {
   useTheme,
 } from "@nwaycorp/nwayplay-designsystem-fe";
 import { Fragment, useState } from "react";
+import { useRecoilValue } from "recoil";
+import { surveyList } from "store/index";
 import QuestionTemplate from "stories/components/QuestionTemplate";
 import {
   StyledSampleDiv,
@@ -57,13 +59,17 @@ export const SURVEY_LIST: ISurveyList[] = [
 const Page = () => {
   const theme = useTheme();
   const [showModal, setShowModal] = useState<boolean>(false);
-  const [step, setStep] = useState<number>(1);
+  const [index, setIndex] = useState<number>(0);
+
+  const resultArray = useRecoilValue(surveyList);
+  console.log("resultArray", resultArray);
+
   const handleNext = () => {
-    if (step > SURVEY_LIST?.length - 1) {
+    if (index > SURVEY_LIST?.length - 1) {
       return;
     }
-    setStep((prev) => prev + 1);
-    console.log(step);
+    setIndex((prev) => prev + 1);
+    console.log(index);
   };
 
   const handleSubmit = () => {
@@ -120,17 +126,21 @@ const Page = () => {
       <Modal
         open={showModal}
         fixBottom={
-          step > SURVEY_LIST?.length - 1 ? (
+          index > SURVEY_LIST?.length - 1 ? (
             <Button onClick={handleSubmit}>Submit</Button>
           ) : (
             <Button onClick={handleNext}>Next</Button>
           )
         }
         onClose={() => {}}
-        size="l"
+        size="m"
       >
         <Grid outer>
-          <QuestionTemplate step={step} />
+          <QuestionTemplate
+            index={index}
+            options={SURVEY_LIST[index]?.options}
+            type={SURVEY_LIST[index]?.type}
+          />
         </Grid>
       </Modal>
     </Fragment>

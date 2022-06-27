@@ -3,7 +3,7 @@ import {
   ToggleButtonGroup,
 } from "@nwaycorp/nwayplay-designsystem-fe";
 import { MouseEvent } from "react";
-import { GENRE_LIST } from "../StyledFormGroup";
+import { GENRE_LIST } from "../QuestionTemplate";
 
 interface FormToggleProps {
   value: string;

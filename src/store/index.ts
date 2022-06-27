@@ -30,4 +30,15 @@ const viewNavigationState = atom({
   },
 });
 
-export { systemState, prevRouteNameState, viewNavigationState, testModeState };
+const surveyList = atom({
+  key: "surveyList",
+  default: [],
+});
+
+export {
+  systemState,
+  prevRouteNameState,
+  viewNavigationState,
+  testModeState,
+  surveyList,
+};
