@@ -1,5 +1,6 @@
 import React, { Fragment, useState } from "react";
 import {
+  Box,
   Button,
   Grid,
   Image,
@@ -19,6 +20,7 @@ import {
   StyledSampleDiv3,
   SurveyBox,
 } from "./styles";
+import SubmitList from "stories/components/SubmitList";
 
 interface ISurveyList {
   question: string;
@@ -90,29 +92,14 @@ const Page = () => {
 
   const handleSubmit = () => {
     console.log("submit");
-    // setResultArray(data);
     const timeStamp = new Date().getTime();
     setResultArray((prev) => [...prev, { id: timeStamp, ...data }]);
-    // 제출하기를 누르면
-    // 로딩화면
-    // 1. QuestionTemplate 안에 있는 데이터들이 setData 되어서 여기의 data에 들어옴
-    // 2. 그럼 들어온 그 data가 setResultArray(data);로 recoil에 저장됨
-    // console.log("제출 된 data!!!!", data);
   };
 
-  // const addTodoItem = () => {
-  //   if (inputValue) {
-  //     setTodoList((oldTodoList) => [
-  //       ...oldTodoList,
-  //       {
-  //         id: generateUID(),
-  //         text: inputValue,
-  //         isComplete: false,
-  //       },
-  //     ]);
-  //     setInputValue("");
-  //   }
-  // };
+  const handleClose = () => {
+    setShowModal(false);
+    setIndex(0);
+  };
 
   return (
     <Fragment>
@@ -162,34 +149,14 @@ const Page = () => {
           </StyledSampleDiv3>
         </Grid>
         <Grid item>
-          <Stack justifyContent="center">
+          <Stack justifyContent="flex-start">
             {resultArray?.length > 0 &&
-              resultArray?.map((item: any) => {
-                console.log("item", item);
+              resultArray?.map((item: any, index: number) => {
                 return (
-                  <Stack direction="row" key={item?.id}>
-                    <Typography variant="body8">
-                      List ID : {item?.id}
-                    </Typography>
-                    <Spacer x="500" />
-                    <Stack direction="row" alignItems="center">
-                      <TextField
-                        label="email"
-                        id="email"
-                        type="text"
-                        defaultValue={item?.user?.name || "user_name"}
-                        readonly
-                      />
-                      <Spacer x="300" />
-                      <TextField
-                        label="email"
-                        id="email"
-                        type="text"
-                        defaultValue={item?.user?.email || "user_email"}
-                        readonly
-                      />
-                    </Stack>
-                  </Stack>
+                  <Box key={item?.id}>
+                    <SubmitList {...item} />
+                    {index < resultArray?.length - 1 && <Spacer y="500" />}
+                  </Box>
                 );
               })}
           </Stack>
@@ -210,7 +177,7 @@ const Page = () => {
             )}
           </Stack>
         }
-        onClose={() => setShowModal(false)}
+        onClose={handleClose}
         size="m"
       >
         <Grid outer>
@@ -222,7 +189,6 @@ const Page = () => {
           />
         </Grid>
       </Modal>
-      {/* <SurveyModal isShow={showModal} setIsShow={setShowModal} /> */}
     </Fragment>
   );
 };
