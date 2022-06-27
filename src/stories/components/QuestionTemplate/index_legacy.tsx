@@ -18,7 +18,6 @@ interface surveyResult {
   };
 }
 
-// const QuestionTemplate = () => {
 const QuestionTemplate = ({ step }: QuestionTemplateProp) => {
   // const [step, setStep] = useState<number>(1);
   // const result = useRecoilValue<surveyResult>(surveyResultState);
@@ -50,21 +49,22 @@ const QuestionTemplate = ({ step }: QuestionTemplateProp) => {
   // 전체를 다 하나의 atom과 selector로 묶을 것인지, 각각 분리할 것인지
 
   return (
-    <StyledQuestionBox>
-      <Typography variant="body4">
-        {`Q${step}. ${SURVEY_LIST[step - 1].question}`}
-      </Typography>
-      <StyledFormGroup
-        step={step - 1}
-        options={SURVEY_LIST[step - 1].options}
-        type={SURVEY_LIST[step - 1].type}
-      />
-      {/* {step > SURVEY_LIST?.length - 1 ? (
-        <Button onClick={handleSubmit}>Submit</Button>
-      ) : (
-        <Button onClick={handleNext}>Next</Button>
-      )} */}
-    </StyledQuestionBox>
+    // <StyledQuestionBox>
+    //   <Typography variant="body4">
+    //     {`Q${step}. ${SURVEY_LIST[step - 1].question}`}
+    //   </Typography>
+    //   <StyledFormGroup
+    //     step={step - 1}
+    //     options={SURVEY_LIST[step - 1].options}
+    //     type={SURVEY_LIST[step - 1].type}
+    //   />
+    //   {/* {step > SURVEY_LIST?.length - 1 ? (
+    //     <Button onClick={handleSubmit}>Submit</Button>
+    //   ) : (
+    //     <Button onClick={handleNext}>Next</Button>
+    //   )} */}
+    // </StyledQuestionBox>
+    <></>
   );
 };
-export default QuestionTemplate;
+// export default QuestionTemplate;

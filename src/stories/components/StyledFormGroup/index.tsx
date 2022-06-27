@@ -1,11 +1,7 @@
-import React, { ChangeEvent, Fragment, useState } from "react";
+import React, { ChangeEvent, useState } from "react";
 
 import {
-  Box,
   Button,
-  Chip,
-  ChipVariant,
-  IconButton,
   SerialField,
   Spacer,
   Stack,
@@ -15,11 +11,10 @@ import {
 } from "@nwaycorp/nwayplay-designsystem-fe";
 import { useRadio } from "hooks/useRadio";
 import { useSerial } from "hooks/useSerial";
+import { useTextField } from "hooks/useTextField";
 import { useToggle } from "hooks/useToggle";
 import { FormRadio } from "../FormRadio";
 import { FormToggle } from "../FormToggle";
-import { useTextField } from "hooks/useTextField";
-import { userFormState } from "store/";
 
 export const GENRE_LIST = [
   {
