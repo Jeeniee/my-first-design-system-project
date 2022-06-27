@@ -30,7 +30,27 @@ const viewNavigationState = atom({
   },
 });
 
-const surveyList = atom({
+interface ISurveyList {
+//   user: { name: string; email: string; todays_feeling: string };
+
+}
+
+// type result = {
+//   color: string;
+//   genre: string[];
+//   id: string;
+//   todays_feeling: string;
+//   user: { name: string; email: string; todays_feeling: string };
+// };
+// interface IData {
+//   genre: string[];
+//   color: string;
+//   personality: string;
+//   code: string | undefined;
+//   user: { name: string; email: string; todays_feeling: string };
+// }
+
+const surveyList = atom<ISurveyList[]>({
   key: "surveyList",
   default: [],
 });

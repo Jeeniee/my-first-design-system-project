@@ -36,6 +36,6 @@ export const SurveyBox = styled.div`
   justify-content: space-between;
   padding: 60px;
   width: 60vw;
-  height: 600px;
+  height: 500px;
   border-radius: 20px;
 `;

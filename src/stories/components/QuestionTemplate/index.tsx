@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Button,
   SerialField,
@@ -12,18 +12,19 @@ import { useRadio } from "hooks/useRadio";
 import { useSerial } from "hooks/useSerial";
 import { useTextField } from "hooks/useTextField";
 import { useToggle } from "hooks/useToggle";
-import { SURVEY_LIST } from "pages/home";
 import { ChangeEvent, useState } from "react";
 import { FormRadio } from "../FormRadio";
 import { FormToggle } from "../FormToggle";
 import StyledFormGroup from "../StyledFormGroup";
 import { StyledQuestionBox } from "./style";
+import { SURVEY_LIST } from "pages/home";
 
 interface IStyledFormGroup {
   options: string[];
   onChange?: (event: MouseEvent, value: any) => void;
   index: number;
   type: "toggle" | "radio" | "serial" | "input" | "rate";
+  setData?: any;
 }
 
 export const GENRE_LIST = [
@@ -53,16 +54,58 @@ export const GENRE_LIST = [
   },
 ];
 
-const QuestionTemplate = ({ index, type, options }: IStyledFormGroup) => {
+const QuestionTemplate = ({
+  index,
+  type,
+  options,
+  setData,
+}: IStyledFormGroup) => {
   const { selectedValue, handleToggle } = useToggle({});
   const { checkedValue, setCheckedValue } = useRadio({});
   const { typedValue, setTypedValue } = useSerial({});
   const { textValue, setTextValue } = useTextField();
   const [feeling, setFeeling] = useState<"happy" | "gloomy" | undefined>();
 
-  console.log("localState", selectedValue, checkedValue, typedValue, textValue);
+  interface IForm {
+    name: string;
+    email: string;
+    feeling: string;
+  }
+
+  const [form, setForm] = useState<IForm[]>();
+
+  // console.log(
+  //   "localState",
+  //   selectedValue,
+  //   checkedValue,
+  //   typedValue,
+  //   textValue,
+  //   feeling
+  // );
 
   const theme = useTheme();
+
+  interface IData {
+    genre: string[];
+    color: string;
+    personality: string;
+    code: string | undefined;
+    user: { name: string; email: string; todays_feeling: string };
+  }
+
+  useEffect(() => {
+    const data = {
+      genre: selectedValue,
+      color: checkedValue,
+      // personality: typedValue,
+      // code: setTextValue,
+      user: textValue,
+      todays_feeling: feeling,
+    };
+
+    setData(data);
+    console.log("컴포넌트 useEffect의 data", data);
+  }, [selectedValue, checkedValue, typedValue, textValue, feeling, setData]);
 
   return (
     <StyledQuestionBox>

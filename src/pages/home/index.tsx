@@ -1,3 +1,4 @@
+import React, { Fragment, useState } from "react";
 import {
   Button,
   Grid,
@@ -5,11 +6,11 @@ import {
   Modal,
   Spacer,
   Stack,
+  TextField,
   Typography,
   useTheme,
 } from "@nwaycorp/nwayplay-designsystem-fe";
-import { Fragment, useState } from "react";
-import { useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 import { surveyList } from "store/index";
 import QuestionTemplate from "stories/components/QuestionTemplate";
 import {
@@ -19,7 +20,7 @@ import {
   SurveyBox,
 } from "./styles";
 
-export interface ISurveyList {
+interface ISurveyList {
   question: string;
   options: string[];
   type: "toggle" | "radio" | "serial" | "input" | "rate";
@@ -56,13 +57,28 @@ export const SURVEY_LIST: ISurveyList[] = [
   { question: "정보입력", options: [], type: "input" },
 ];
 
+type result = {
+  color: string;
+  genre: string[];
+  id: string;
+  todays_feeling: string;
+  user: { name: string; email: string; todays_feeling: string };
+};
+
 const Page = () => {
   const theme = useTheme();
   const [showModal, setShowModal] = useState<boolean>(false);
   const [index, setIndex] = useState<number>(0);
+  const [data, setData] = useState([]);
+  console.log("홈페이지의 data", data);
 
-  const resultArray = useRecoilValue(surveyList);
-  console.log("resultArray", resultArray);
+  const [resultArray, setResultArray] = useRecoilState(surveyList);
+  console.log("홈페이지의 resultArray", resultArray);
+
+  const handlePrev = () => {
+    setIndex((prev) => prev - 1);
+    console.log(index);
+  };
 
   const handleNext = () => {
     if (index > SURVEY_LIST?.length - 1) {
@@ -74,10 +90,33 @@ const Page = () => {
 
   const handleSubmit = () => {
     console.log("submit");
+    // setResultArray(data);
+    const timeStamp = new Date().getTime();
+    setResultArray((prev) => [...prev, { id: timeStamp, ...data }]);
+    // 제출하기를 누르면
+    // 로딩화면
+    // 1. QuestionTemplate 안에 있는 데이터들이 setData 되어서 여기의 data에 들어옴
+    // 2. 그럼 들어온 그 data가 setResultArray(data);로 recoil에 저장됨
+    // console.log("제출 된 data!!!!", data);
   };
+
+  // const addTodoItem = () => {
+  //   if (inputValue) {
+  //     setTodoList((oldTodoList) => [
+  //       ...oldTodoList,
+  //       {
+  //         id: generateUID(),
+  //         text: inputValue,
+  //         isComplete: false,
+  //       },
+  //     ]);
+  //     setInputValue("");
+  //   }
+  // };
+
   return (
     <Fragment>
-      <Grid container>
+      <Grid>
         <Grid xs={12} item>
           <StyledSampleDiv theme={theme}>
             <Typography variant="h1" color={theme.colors.gray.white}>
@@ -122,17 +161,56 @@ const Page = () => {
             </SurveyBox>
           </StyledSampleDiv3>
         </Grid>
+        <Grid item>
+          <Stack justifyContent="center">
+            {resultArray?.length > 0 &&
+              resultArray?.map((item: any) => {
+                console.log("item", item);
+                return (
+                  <Stack direction="row" key={item?.id}>
+                    <Typography variant="body8">
+                      List ID : {item?.id}
+                    </Typography>
+                    <Spacer x="500" />
+                    <Stack direction="row" alignItems="center">
+                      <TextField
+                        label="email"
+                        id="email"
+                        type="text"
+                        defaultValue={item?.user?.name || "user_name"}
+                        readonly
+                      />
+                      <Spacer x="300" />
+                      <TextField
+                        label="email"
+                        id="email"
+                        type="text"
+                        defaultValue={item?.user?.email || "user_email"}
+                        readonly
+                      />
+                    </Stack>
+                  </Stack>
+                );
+              })}
+          </Stack>
+        </Grid>
       </Grid>
       <Modal
         open={showModal}
         fixBottom={
-          index > SURVEY_LIST?.length - 1 ? (
-            <Button onClick={handleSubmit}>Submit</Button>
-          ) : (
-            <Button onClick={handleNext}>Next</Button>
-          )
+          <Stack direction="row" justifyContent="flex-end">
+            <Button onClick={handlePrev} disabled={index < 1} color="gray">
+              prev
+            </Button>
+            <Spacer x={"300"} />
+            {index > SURVEY_LIST?.length - 1 ? (
+              <Button onClick={handleSubmit}>Submit</Button>
+            ) : (
+              <Button onClick={handleNext}>next</Button>
+            )}
+          </Stack>
         }
-        onClose={() => {}}
+        onClose={() => setShowModal(false)}
         size="m"
       >
         <Grid outer>
@@ -140,9 +218,11 @@ const Page = () => {
             index={index}
             options={SURVEY_LIST[index]?.options}
             type={SURVEY_LIST[index]?.type}
+            setData={setData}
           />
         </Grid>
       </Modal>
+      {/* <SurveyModal isShow={showModal} setIsShow={setShowModal} /> */}
     </Fragment>
   );
 };
