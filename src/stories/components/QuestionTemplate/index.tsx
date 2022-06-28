@@ -1,11 +1,16 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import {
+  Box,
   Button,
+  Checkbox,
+  Image,
   SerialField,
   Spacer,
   Stack,
   TextField,
+  Transition,
   Typography,
+  useSerialField,
   useTheme,
 } from "@nwaycorp/nwayplay-designsystem-fe";
 import { useRadio } from "hooks/useRadio";
@@ -15,11 +20,11 @@ import { useToggle } from "hooks/useToggle";
 import { ChangeEvent, useState } from "react";
 import { FormRadio } from "../FormRadio";
 import { FormToggle } from "../FormToggle";
-import StyledFormGroup from "../StyledFormGroup";
-import { StyledQuestionBox } from "./style";
+import { StyledCheckRobotStack, StyledQuestionBox } from "./style";
 import { SURVEY_LIST } from "pages/home";
+import { useCheckbox } from "hooks/useCheckbox";
 
-interface IStyledFormGroup {
+interface IQuestionTemplate {
   options: string[];
   onChange?: (event: MouseEvent, value: any) => void;
   index: number;
@@ -59,29 +64,42 @@ const QuestionTemplate = ({
   type,
   options,
   setData,
-}: IStyledFormGroup) => {
+}: IQuestionTemplate) => {
   const { selectedValue, handleToggle } = useToggle({});
-  const { checkedValue, setCheckedValue } = useRadio({});
-  const { typedValue, setTypedValue } = useSerial({});
+  const { checkedValue: radioValue, setCheckedValue: setRadioValue } = useRadio(
+    {}
+  );
   const { textValue, setTextValue } = useTextField();
   const [feeling, setFeeling] = useState<"happy" | "gloomy" | undefined>();
+
+  const [
+    serial,
+    onChangeSerialInput,
+    isValidSerial,
+    errorTextSerial,
+  ] = useSerialField({
+    validate: useCallback((value: string) => {
+      if (value.length > 0 && value.length < 5) {
+        return { isValid: false, message: "Number should be 5 digits." };
+      }
+      if (value !== "25283") {
+        return { isValid: false, message: "Check your number." };
+      }
+
+      return {
+        isValid: true,
+        message: "",
+      };
+    }, []),
+  });
+
+  const { checked, handleCheck } = useCheckbox();
 
   interface IForm {
     name: string;
     email: string;
     feeling: string;
   }
-
-  const [form, setForm] = useState<IForm[]>();
-
-  // console.log(
-  //   "localState",
-  //   selectedValue,
-  //   checkedValue,
-  //   typedValue,
-  //   textValue,
-  //   feeling
-  // );
 
   const theme = useTheme();
 
@@ -96,7 +114,7 @@ const QuestionTemplate = ({
   useEffect(() => {
     const data = {
       genre: selectedValue,
-      color: checkedValue,
+      color: radioValue,
       // personality: typedValue,
       // code: setTextValue,
       user: textValue,
@@ -105,7 +123,7 @@ const QuestionTemplate = ({
 
     setData(data);
     console.log("컴포넌트 useEffect의 data", data);
-  }, [selectedValue, checkedValue, typedValue, textValue, feeling, setData]);
+  }, [selectedValue, radioValue, textValue, feeling, setData]);
 
   return (
     <StyledQuestionBox>
@@ -117,8 +135,8 @@ const QuestionTemplate = ({
       ) : type === "radio" ? (
         <FormRadio
           options={options}
-          value={checkedValue}
-          onChange={(value) => setCheckedValue(value!)}
+          value={radioValue}
+          onChange={(value) => setRadioValue(value!)}
         />
       ) : type === "input" ? (
         <Stack alignItems="flex-start">
@@ -228,13 +246,32 @@ const QuestionTemplate = ({
           </Stack>
         </Stack>
       ) : type === "serial" ? (
-        <SerialField
-          type="text"
-          inputMode="numeric"
-          length={"6"}
-          value={typedValue}
-          onChange={(value) => setTypedValue(value)}
-        />
+        <StyledCheckRobotStack theme={theme}>
+          <Stack direction="row" alignItems="center">
+            <Checkbox checked={checked} onChange={handleCheck} />
+            <Typography
+              variant="body5"
+              color={
+                checked ? theme.colors.gray["black"] : theme.colors.gray[500]
+              }
+            >
+              I'm not a Robot
+            </Typography>
+          </Stack>
+          <Image
+            src={`https://images.unsplash.com/photo-1511376029469-945f1314a13e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80`}
+            width={"80%"}
+          />
+          <SerialField
+            value={serial}
+            onChange={onChangeSerialInput}
+            errorText={errorTextSerial}
+            error={isValidSerial}
+            type=""
+            inputMode={"numeric"}
+            length={"5"}
+          />
+        </StyledCheckRobotStack>
       ) : null}
     </StyledQuestionBox>
   );

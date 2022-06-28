@@ -17,7 +17,7 @@ export const FormToggle = ({ value, onChange }: FormToggleProps) => {
       onChange={(event, value) => onChange(event, value)}
     >
       {GENRE_LIST.map(({ value }, index) => (
-        <ToggleButton value={value} size="l">
+        <ToggleButton value={value} key={`${value}_${index}`} size="l">
           {value}
         </ToggleButton>
       ))}

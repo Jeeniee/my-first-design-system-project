@@ -57,7 +57,7 @@ interface IStyledFormGroup {
 const StyledFormGroup = ({ type, options }: IStyledFormGroup) => {
   const { selectedValue, handleToggle } = useToggle({});
   const { checkedValue, setCheckedValue } = useRadio({});
-  const { typedValue, setTypedValue } = useSerial({});
+  const { typedValue, handleChange } = useSerial();
   const { textValue, setTextValue } = useTextField();
 
   const [feeling, setFeeling] = useState<"happy" | "gloomy" | undefined>();
@@ -90,9 +90,6 @@ const StyledFormGroup = ({ type, options }: IStyledFormGroup) => {
           onChange={(e: ChangeEvent<HTMLInputElement>) =>
             setTextValue((prev) => ({ ...prev, name: e.target.value }))
           }
-          // onChange={({ value }: { value: string }) =>
-          //   setTextValue((prev) => ({ ...prev, name: value }))
-          // }
         />
         <Spacer x={"500"} />
         <Typography variant="body9" color={theme.colors.error}>
@@ -114,9 +111,6 @@ const StyledFormGroup = ({ type, options }: IStyledFormGroup) => {
           onChange={(e: ChangeEvent<HTMLInputElement>) =>
             setTextValue((prev) => ({ ...prev, email: e.target.value }))
           }
-          // onChange={({ value }: { value: string }) =>
-          //   setTextValue((prev) => ({ ...prev, name: value }))
-          // }
         />
         <Spacer x={"500"} />
         <Typography variant="body9" color={theme.colors.error}>
@@ -197,18 +191,9 @@ const StyledFormGroup = ({ type, options }: IStyledFormGroup) => {
       inputMode="numeric"
       length={"6"}
       value={typedValue}
-      onChange={(value) => setTypedValue(value)}
+      onChange={handleChange}
     />
-  ) : //   ) : type === "rate" ? (
-  //     <Chip
-  //       color="primary"
-  //       label="test"
-  //       onClick={() => {}}
-  //       size="medium"
-  //     //   textColor="black"
-  //     //   variant="outlined"
-  //     />
-  null;
+  ) : null;
 };
 
 export default StyledFormGroup;

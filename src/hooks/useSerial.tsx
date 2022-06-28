@@ -1,10 +1,12 @@
 import { useState } from "react";
 
-interface useSerialProps {
-  initTypedValue?: string;
-}
+export const useSerial = () => {
+  const [typedValue, setTypedValue] = useState<string>("");
 
-export const useSerial = ({ initTypedValue = "" }: useSerialProps) => {
-  const [typedValue, setTypedValue] = useState<string>(initTypedValue);
-  return { typedValue, setTypedValue };
+  const handleChange = (value: string) => {
+    const targetValue = value;
+
+    setTypedValue(targetValue);
+  };
+  return { typedValue, handleChange };
 };
