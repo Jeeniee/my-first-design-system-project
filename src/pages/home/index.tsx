@@ -20,7 +20,6 @@ import {
 } from "./styles";
 import SubmitList from "stories/components/SubmitList";
 import SurveyModal from "stories/components/SurveyModal";
-import { useModal } from "hooks/useModal";
 import { useModalContext } from "store/ModalProvider";
 
 const Page = () => {
