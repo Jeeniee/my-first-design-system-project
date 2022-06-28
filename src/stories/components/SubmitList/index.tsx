@@ -16,21 +16,15 @@ import { IData } from "../QuestionTemplate";
 
 const SubmitList = ({ color, genre, id, user }: any) => {
   const theme = useTheme();
-  const { showModal, setShowModal } = useModalContext();
+  const { handleEdit } = useModalContext();
   const [resultArray, setResultArray] = useRecoilState(surveyList);
 
   const arrayIndex = resultArray.findIndex((item) => item?.id === id);
   console.log("arrayIndex", arrayIndex);
 
-  const handleEdit = () => {
-    // setShowModal(true);
-    console.log("edit", arrayIndex);
-  };
-
   const handleDelete = () => {
     const newArr = removeIndex(resultArray, arrayIndex);
     setResultArray(newArr);
-    console.log("삭제했어! resultArray", resultArray);
   };
 
   const removeIndex = (arr: IData[], index: number) => {
@@ -43,7 +37,11 @@ const SubmitList = ({ color, genre, id, user }: any) => {
           <Typography variant="body8">List ID : {id}</Typography>
         </Stack>
         <Stack direction="row" justifyContent="flex-end">
-          <Button size="s" color="primary" onClick={handleEdit}>
+          <Button
+            size="s"
+            color="primary"
+            onClick={() => handleEdit(arrayIndex)}
+          >
             EDIT
           </Button>
           <Spacer x={"500"} />
