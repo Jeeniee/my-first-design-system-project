@@ -1,6 +1,7 @@
 import React from "react";
 import {
   Box,
+  Button,
   Spacer,
   Stack,
   TextField,
@@ -8,13 +9,50 @@ import {
   useTheme,
 } from "@nwaycorp/nwayplay-designsystem-fe";
 import { StyledListStack } from "./style";
+import { useModalContext } from "store/ModalProvider";
+import { useRecoilState } from "recoil";
+import { surveyList } from "store/index";
+import { IData } from "../QuestionTemplate";
 
 const SubmitList = ({ color, genre, id, user }: any) => {
   const theme = useTheme();
+  const { showModal, setShowModal } = useModalContext();
+  const [resultArray, setResultArray] = useRecoilState(surveyList);
+
+  const arrayIndex = resultArray.findIndex((item) => item?.id === id);
+  console.log("arrayIndex", arrayIndex);
+
+  const handleEdit = () => {
+    // setShowModal(true);
+    console.log("edit", arrayIndex);
+  };
+
+  const handleDelete = () => {
+    const newArr = removeIndex(resultArray, arrayIndex);
+    setResultArray(newArr);
+    console.log("삭제했어! resultArray", resultArray);
+  };
+
+  const removeIndex = (arr: IData[], index: number) => {
+    return [...arr.slice(0, index), ...arr.slice(index + 1)];
+  };
   return (
     <StyledListStack theme={theme}>
-      <Typography variant="body8">List ID : {id}</Typography>
-      <Spacer x="500" />
+      <Stack direction="row" justifyContent="space-between">
+        <Stack>
+          <Typography variant="body8">List ID : {id}</Typography>
+        </Stack>
+        <Stack direction="row" justifyContent="flex-end">
+          <Button size="s" color="primary" onClick={handleEdit}>
+            EDIT
+          </Button>
+          <Spacer x={"500"} />
+          <Button size="s" color="black" onClick={handleDelete}>
+            DELETE
+          </Button>
+        </Stack>
+      </Stack>
+      <Spacer y="300" />
       <Stack direction="row" alignItems="flex-start">
         <Stack>
           <Typography variant="body4">User Info</Typography>
