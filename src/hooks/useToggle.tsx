@@ -1,11 +1,7 @@
 import { MouseEvent, useState } from "react";
 
-interface useToggleProps {
-  initSelectedValue?: string;
-}
-
-export const useToggle = ({ initSelectedValue = "" }: useToggleProps) => {
-  const [selectedValue, setSelectedValue] = useState<string>(initSelectedValue);
+export const useToggle = () => {
+  const [selectedValue, setSelectedValue] = useState<string>("");
   const handleToggle = (event: MouseEvent<HTMLElement>, value: string) => {
     event.preventDefault();
     setSelectedValue(() => value);

@@ -5,33 +5,42 @@ import {
   Stack,
   TextField,
   Typography,
+  useTheme,
 } from "@nwaycorp/nwayplay-designsystem-fe";
 import { StyledListStack } from "./style";
 
-const SubmitList = ({ color, genre, id, user }: any) => {
+const SubmitList = ({ color, genre, id, user, passed }: any) => {
+  const theme = useTheme();
   return (
-    <StyledListStack>
+    <StyledListStack theme={theme}>
       <Typography variant="body8">List ID : {id}</Typography>
       <Spacer x="500" />
       <Stack direction="row" alignItems="flex-start">
-        <TextField
-          label="name"
-          id="name"
-          type="text"
-          defaultValue={user?.name || "user_name"}
-          readonly
-        />
-        <Spacer x="300" />
-        <TextField
-          label="email"
-          id="email"
-          type="email"
-          defaultValue={user?.email || "user_email"}
-          readonly
-        />
+        <Stack>
+          <Typography variant="body4">User</Typography>
+          <TextField
+            label="name"
+            id="name"
+            type="text"
+            defaultValue={user?.name || "user_name"}
+            readonly
+          />
+          <Spacer x="300" />
+          <TextField
+            label="email"
+            id="email"
+            type="email"
+            defaultValue={user?.email || "user_email"}
+            readonly
+          />
+        </Stack>
         <Spacer x="300" />
         <Stack>
-          <Typography variant="body6">genre</Typography>
+          <Typography variant="body4">Color</Typography>
+          <Typography variant="body8">{color || "color"}</Typography>
+        </Stack>
+        <Stack>
+          <Typography variant="body4">Genre</Typography>
           {genre &&
             genre?.map((item: string, index: number) => (
               <Typography key={`${item}_${index}`} variant="body8">

@@ -7,7 +7,7 @@ import {
   Stack,
 } from "@nwaycorp/nwayplay-designsystem-fe";
 import QuestionTemplate from "../QuestionTemplate";
-import { SURVEY_LIST } from "pages/home";
+import { SURVEY_QUESTION_LIST } from "pages/home";
 
 // interface ISurveyList {
 //   question: string;
@@ -15,7 +15,7 @@ import { SURVEY_LIST } from "pages/home";
 //   type: "toggle" | "radio" | "serial" | "input" | "rate";
 // }
 
-// export const SURVEY_LIST: ISurveyList[] = [
+// export const SURVEY_QUESTION_LIST: ISurveyList[] = [
 //   { question: "영화 장르 고르기", options: [], type: "toggle" },
 //   {
 //     question: "How do you wear colour?",
@@ -62,7 +62,7 @@ const SurveyModal = ({
   };
 
   const handleNext = () => {
-    if (index > SURVEY_LIST?.length - 1) {
+    if (index > SURVEY_QUESTION_LIST?.length - 1) {
       return;
     }
     setIndex((prev) => prev + 1);
@@ -82,7 +82,7 @@ const SurveyModal = ({
             prev
           </Button>
           <Spacer x={"300"} />
-          {index > SURVEY_LIST?.length - 1 ? (
+          {index > SURVEY_QUESTION_LIST?.length - 1 ? (
             <Button onClick={handleSubmit}>Submit</Button>
           ) : (
             <Button onClick={handleNext}>next</Button>
@@ -94,9 +94,10 @@ const SurveyModal = ({
     >
       <Grid outer>
         <QuestionTemplate
+          setData={() => {}}
           index={index}
-          options={SURVEY_LIST[index]?.options}
-          type={SURVEY_LIST[index]?.type}
+          options={SURVEY_QUESTION_LIST[index]?.options}
+          type={SURVEY_QUESTION_LIST[index]?.type}
         />
       </Grid>
     </Modal>

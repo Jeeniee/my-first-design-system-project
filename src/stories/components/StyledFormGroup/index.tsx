@@ -55,7 +55,7 @@ interface IStyledFormGroup {
 }
 
 const StyledFormGroup = ({ type, options }: IStyledFormGroup) => {
-  const { selectedValue, handleToggle } = useToggle({});
+  const { selectedValue, handleToggle } = useToggle();
   const { checkedValue, setCheckedValue } = useRadio({});
   const { typedValue, handleChange } = useSerial();
   const { textValue, setTextValue } = useTextField();

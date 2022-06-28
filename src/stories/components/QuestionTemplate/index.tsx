@@ -21,15 +21,22 @@ import { ChangeEvent, useState } from "react";
 import { FormRadio } from "../FormRadio";
 import { FormToggle } from "../FormToggle";
 import { StyledCheckRobotStack, StyledQuestionBox } from "./style";
-import { SURVEY_LIST } from "pages/home";
+import { SURVEY_QUESTION_LIST } from "pages/home";
 import { useCheckbox } from "hooks/useCheckbox";
+
+export interface IData {
+  genre: string;
+  color: string;
+  code: string;
+  user: { name: string; email: string; todays_feeling: string };
+}
 
 interface IQuestionTemplate {
   options: string[];
   onChange?: (event: MouseEvent, value: any) => void;
   index: number;
   type: "toggle" | "radio" | "serial" | "input" | "rate";
-  setData?: any;
+  setData: (data: IData) => void;
 }
 
 export const GENRE_LIST = [
@@ -65,7 +72,7 @@ const QuestionTemplate = ({
   options,
   setData,
 }: IQuestionTemplate) => {
-  const { selectedValue, handleToggle } = useToggle({});
+  const { selectedValue, handleToggle } = useToggle();
   const { checkedValue: radioValue, setCheckedValue: setRadioValue } = useRadio(
     {}
   );
@@ -95,40 +102,22 @@ const QuestionTemplate = ({
 
   const { checked, handleCheck } = useCheckbox();
 
-  interface IForm {
-    name: string;
-    email: string;
-    feeling: string;
-  }
-
   const theme = useTheme();
 
-  interface IData {
-    genre: string[];
-    color: string;
-    personality: string;
-    code: string | undefined;
-    user: { name: string; email: string; todays_feeling: string };
-  }
-
   useEffect(() => {
-    const data = {
+    const data: IData = {
       genre: selectedValue,
       color: radioValue,
-      // personality: typedValue,
-      // code: setTextValue,
+      code: serial,
       user: textValue,
-      todays_feeling: feeling,
     };
-
     setData(data);
-    console.log("컴포넌트 useEffect의 data", data);
-  }, [selectedValue, radioValue, textValue, feeling, setData]);
+  }, [selectedValue, radioValue, textValue, feeling, serial, setData]);
 
   return (
     <StyledQuestionBox>
       <Typography variant="body4">
-        {`Q${index + 1}. ${SURVEY_LIST[index]?.question}`}
+        {`Q${index + 1}. ${SURVEY_QUESTION_LIST[index]?.question}`}
       </Typography>
       {type === "toggle" ? (
         <FormToggle value={selectedValue} onChange={handleToggle} />

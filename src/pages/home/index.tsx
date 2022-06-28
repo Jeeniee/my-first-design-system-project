@@ -13,7 +13,7 @@ import {
 } from "@nwaycorp/nwayplay-designsystem-fe";
 import { useRecoilState } from "recoil";
 import { surveyList } from "store/index";
-import QuestionTemplate from "stories/components/QuestionTemplate";
+import QuestionTemplate, { IData } from "stories/components/QuestionTemplate";
 import {
   StyledSampleDiv,
   StyledSampleDiv2,
@@ -28,7 +28,7 @@ interface ISurveyList {
   type: "toggle" | "radio" | "serial" | "input" | "rate";
 }
 
-export const SURVEY_LIST: ISurveyList[] = [
+export const SURVEY_QUESTION_LIST: ISurveyList[] = [
   { question: "영화 장르 고르기", options: [], type: "toggle" },
   {
     question: "How do you wear colour?",
@@ -56,7 +56,7 @@ const Page = () => {
   const theme = useTheme();
   const [showModal, setShowModal] = useState<boolean>(false);
   const [index, setIndex] = useState<number>(0);
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<IData>();
   console.log("홈페이지의 data", data);
 
   const [resultArray, setResultArray] = useRecoilState(surveyList);
@@ -68,8 +68,8 @@ const Page = () => {
   };
 
   const handleNext = () => {
-    if (index === SURVEY_LIST?.length -1) {
-      return ;
+    if (index === SURVEY_QUESTION_LIST?.length - 1) {
+      return;
     }
     setIndex((prev) => prev + 1);
     console.log(index);
@@ -156,7 +156,7 @@ const Page = () => {
               prev
             </Button>
             <Spacer x={"300"} />
-            {index === SURVEY_LIST?.length - 1 ? (
+            {index === SURVEY_QUESTION_LIST?.length - 1 ? (
               <Button onClick={handleSubmit}>Submit</Button>
             ) : (
               <Button onClick={handleNext}>next</Button>
@@ -169,8 +169,8 @@ const Page = () => {
         <Grid outer>
           <QuestionTemplate
             index={index}
-            options={SURVEY_LIST[index]?.options}
-            type={SURVEY_LIST[index]?.type}
+            options={SURVEY_QUESTION_LIST[index]?.options}
+            type={SURVEY_QUESTION_LIST[index]?.type}
             setData={setData}
           />
         </Grid>
