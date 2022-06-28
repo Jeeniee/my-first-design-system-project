@@ -11,7 +11,6 @@ import {
 } from "@nwaycorp/nwayplay-designsystem-fe";
 import { useRecoilState } from "recoil";
 import { surveyList } from "store/index";
-import { IData } from "stories/components/QuestionTemplate";
 import {
   StyledSampleDiv,
   StyledSampleDiv2,
@@ -24,11 +23,7 @@ import { useModalContext } from "store/ModalProvider";
 
 const Page = () => {
   const theme = useTheme();
-  const { showModal, setShowModal } = useModalContext();
-  const [index, setIndex] = useState<number>(0);
-  const [data, setData] = useState<IData>();
-  console.log("홈페이지의 data", data);
-
+  const { setShowModal } = useModalContext();
   const [resultArray, setResultArray] = useRecoilState(surveyList);
   console.log("홈페이지의 resultArray", resultArray);
 
@@ -93,15 +88,7 @@ const Page = () => {
           </Stack>
         </Grid>
       </Grid>
-      <SurveyModal
-        // showModal={showModal}
-        // setShowModal={setShowModal}
-        index={index}
-        setIndex={setIndex}
-        setResultArray={setResultArray}
-        data={data}
-        setData={setData}
-      />
+      <SurveyModal />
     </Fragment>
   );
 };

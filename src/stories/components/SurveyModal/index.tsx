@@ -7,8 +7,9 @@ import {
   Stack,
 } from "@nwaycorp/nwayplay-designsystem-fe";
 import QuestionTemplate, { IData } from "../QuestionTemplate";
-import { SetterOrUpdater } from "recoil";
+import { useRecoilState } from "recoil";
 import { useModalContext } from "store/ModalProvider";
+import { surveyList } from "store/index";
 
 interface ISurveyList {
   question: string;
@@ -32,23 +33,14 @@ export const SURVEY_QUESTION_LIST: ISurveyList[] = [
   { question: "정보입력", options: [], type: "input" },
 ];
 
-const SurveyModal = ({
-  index,
-  setIndex,
-  setResultArray,
-  data,
-  setData,
-}: //   showModal,
-//   setShowModal,
-{
-  index: number;
-  setIndex: Dispatch<SetStateAction<number>>;
-  setResultArray: SetterOrUpdater<any[]>;
-  data: IData | undefined;
-  setData: React.Dispatch<React.SetStateAction<IData | undefined>>;
-  //   showModal: boolean;
-  //   setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
-}) => {
+const SurveyModal = () => {
+  const [index, setIndex] = useState<number>(0);
+  const [data, setData] = useState<IData>();
+  console.log("모달의 data", data);
+
+  const [resultArray, setResultArray] = useRecoilState(surveyList);
+  console.log("모달의 resultArray", resultArray);
+
   const handlePrev = () => {
     setIndex((prev) => prev - 1);
     console.log(index);
