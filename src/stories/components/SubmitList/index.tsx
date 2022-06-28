@@ -76,6 +76,12 @@ const SubmitList = ({ color, genre, id, user }: any) => {
           <Typography variant="body8">{color || "color"}</Typography>
         </Stack>
         <Stack>
+          <Typography variant="body4">Todays Feeling</Typography>
+          <Typography variant="body8">
+            {user?.todays_feeling || "todays_feeling"}
+          </Typography>
+        </Stack>
+        <Stack>
           <Typography variant="body4">Genre</Typography>
           {genre &&
             genre?.map((item: string, index: number) => (

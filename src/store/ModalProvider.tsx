@@ -1,5 +1,5 @@
 import { useModal } from "hooks/useModal";
-import React, { createContext, useContext } from "react";
+import React, { createContext, useContext, useState } from "react";
 import { useRecoilState } from "recoil";
 import { IData } from "stories/components/QuestionTemplate";
 import { surveyList } from ".";
@@ -13,10 +13,16 @@ const ModalContext = createContext({
 const ModalProvider = ({ children }: { children: React.ReactNode }) => {
   const { showModal, setShowModal } = useModal();
   const [resultArray, setResultArray] = useRecoilState(surveyList);
+  const [editIndex, setEditIndex] = useState<number>(0);
+
+  const data = resultArray.find((arr) => arr.id === editIndex);
+  // editIndex가 아닌 id
+  console.log(data);
 
   const handleEdit = (index: number) => {
+    setEditIndex(index);
     setShowModal(true);
-    console.log(`=========${index}번 인덱스 edit 요청임`);
+    console.log(`=========${editIndex}번 인덱스 edit 요청임`);
   };
 
   return (

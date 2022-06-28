@@ -25,7 +25,7 @@ const Page = () => {
   const theme = useTheme();
   const { setShowModal } = useModalContext();
   const [resultArray, setResultArray] = useRecoilState(surveyList);
-  console.log("홈페이지의 resultArray", resultArray);
+  // console.log("홈페이지의 resultArray", resultArray);
 
   return (
     <Fragment>
@@ -74,7 +74,7 @@ const Page = () => {
             </SurveyBox>
           </StyledSampleDiv3>
         </Grid>
-        <Grid item>
+        <Grid item outer>
           <Stack justifyContent="flex-start">
             {resultArray?.length > 0 &&
               resultArray?.map((item: any, index: number) => {

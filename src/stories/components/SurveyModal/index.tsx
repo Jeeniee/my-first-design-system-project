@@ -36,14 +36,14 @@ export const SURVEY_QUESTION_LIST: ISurveyList[] = [
 const SurveyModal = () => {
   const [index, setIndex] = useState<number>(0);
   const [data, setData] = useState<IData>();
-  console.log("모달의 data", data);
+  // console.log("모달의 data", data);
 
   const [resultArray, setResultArray] = useRecoilState(surveyList);
-  console.log("모달의 resultArray", resultArray);
+  // console.log("모달의 resultArray", resultArray);
 
   const handlePrev = () => {
     setIndex((prev) => prev - 1);
-    console.log(index);
+    // console.log(index);
   };
   const { showModal, setShowModal } = useModalContext();
 
@@ -60,6 +60,7 @@ const SurveyModal = () => {
     const timeStamp = new Date().getTime();
     setResultArray((prev) => [...prev, { id: timeStamp, ...data }]);
     setShowModal(false);
+    setIndex(0);
   };
 
   const handleClose = () => {
