@@ -9,7 +9,7 @@ import {
 } from "@nwaycorp/nwayplay-designsystem-fe";
 import { StyledListStack } from "./style";
 
-const SubmitList = ({ color, genre, id, user, passed }: any) => {
+const SubmitList = ({ color, genre, id, user }: any) => {
   const theme = useTheme();
   return (
     <StyledListStack theme={theme}>
@@ -17,7 +17,7 @@ const SubmitList = ({ color, genre, id, user, passed }: any) => {
       <Spacer x="500" />
       <Stack direction="row" alignItems="flex-start">
         <Stack>
-          <Typography variant="body4">User</Typography>
+          <Typography variant="body4">User Info</Typography>
           <TextField
             label="name"
             id="name"

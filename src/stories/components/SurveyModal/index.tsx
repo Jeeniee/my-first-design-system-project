@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import {
   Button,
   Grid,
@@ -6,60 +6,53 @@ import {
   Spacer,
   Stack,
 } from "@nwaycorp/nwayplay-designsystem-fe";
-import QuestionTemplate from "../QuestionTemplate";
-import { SURVEY_QUESTION_LIST } from "pages/home";
+import QuestionTemplate, { IData } from "../QuestionTemplate";
+import { SetterOrUpdater } from "recoil";
+import { useModalContext } from "store/ModalProvider";
+interface ISurveyList {
+  question: string;
+  options: string[];
+  type: "toggle" | "radio" | "serial" | "input" | "rate";
+}
 
-// interface ISurveyList {
-//   question: string;
-//   options: string[];
-//   type: "toggle" | "radio" | "serial" | "input" | "rate";
-// }
-
-// export const SURVEY_QUESTION_LIST: ISurveyList[] = [
-//   { question: "영화 장르 고르기", options: [], type: "toggle" },
-//   {
-//     question: "How do you wear colour?",
-//     options: [
-//       "PRETTY PASTELS",
-//       "BLACK IS THE ONE",
-//       "STRONG, CONTRASTING AND BRIGHT SHADES",
-//       "THAT'S NOT A THING",
-//     ],
-//     type: "radio",
-//   },
-//   {
-//     question: "Which personality do you most aspire to?",
-//     options: [
-//       "RISK-TAKER, LIVES LIFE TO THE FULLEST",
-//       "TOTAL ZEN",
-//       "WELL-GROOMED, SOPHISTICATED",
-//       "TREND-SETTER, LAID BACK",
-//     ],
-//     type: "radio",
-//   },
-//   { question: "Type this code", options: [], type: "serial" },
-//   // {
-//   //   question: "How many stars would you rate this form?",
-//   //   options: [],
-//   //   type: "rate",
-//   // },
-//   { question: "정보입력", options: [], type: "input" },
-// ];
+export const SURVEY_QUESTION_LIST: ISurveyList[] = [
+  { question: "영화 장르 고르기", options: [], type: "toggle" },
+  {
+    question: "How do you wear colour?",
+    options: [
+      "PRETTY PASTELS",
+      "BLACK IS THE ONE",
+      "STRONG, CONTRASTING AND BRIGHT SHADES",
+      "THAT'S NOT A THING",
+    ],
+    type: "radio",
+  },
+  { question: "Type this code", options: [], type: "serial" },
+  { question: "정보입력", options: [], type: "input" },
+];
 
 const SurveyModal = ({
-  isShow,
-  setIsShow,
-}: {
-  isShow: boolean;
-  setIsShow: any;
+  index,
+  setIndex,
+  setResultArray,
+  data,
+  setData,
+}: //   showModal,
+//   setShowModal,
+{
+  index: number;
+  setIndex: Dispatch<SetStateAction<number>>;
+  setResultArray: SetterOrUpdater<any[]>;
+  data: IData | undefined;
+  setData: React.Dispatch<React.SetStateAction<IData | undefined>>;
+  //   showModal: boolean;
+  //   setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
-  const [showModal, setShowModal] = useState<boolean>(false);
-  const [index, setIndex] = useState<number>(0);
-
   const handlePrev = () => {
     setIndex((prev) => prev - 1);
     console.log(index);
   };
+  const { showModal, setShowModal } = useModalContext();
 
   const handleNext = () => {
     if (index > SURVEY_QUESTION_LIST?.length - 1) {
@@ -71,6 +64,14 @@ const SurveyModal = ({
 
   const handleSubmit = () => {
     console.log("submit");
+    const timeStamp = new Date().getTime();
+    setResultArray((prev) => [...prev, { id: timeStamp, ...data }]);
+    setShowModal(false);
+  };
+
+  const handleClose = () => {
+    setShowModal(false);
+    setIndex(0);
   };
 
   return (
@@ -82,22 +83,22 @@ const SurveyModal = ({
             prev
           </Button>
           <Spacer x={"300"} />
-          {index > SURVEY_QUESTION_LIST?.length - 1 ? (
+          {index === SURVEY_QUESTION_LIST?.length - 1 ? (
             <Button onClick={handleSubmit}>Submit</Button>
           ) : (
             <Button onClick={handleNext}>next</Button>
           )}
         </Stack>
       }
-      onClose={() => setShowModal(false)}
+      onClose={handleClose}
       size="m"
     >
       <Grid outer>
         <QuestionTemplate
-          setData={() => {}}
           index={index}
           options={SURVEY_QUESTION_LIST[index]?.options}
           type={SURVEY_QUESTION_LIST[index]?.type}
+          setData={setData}
         />
       </Grid>
     </Modal>

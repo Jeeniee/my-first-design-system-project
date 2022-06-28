@@ -21,8 +21,8 @@ import { ChangeEvent, useState } from "react";
 import { FormRadio } from "../FormRadio";
 import { FormToggle } from "../FormToggle";
 import { StyledCheckRobotStack, StyledQuestionBox } from "./style";
-import { SURVEY_QUESTION_LIST } from "pages/home";
 import { useCheckbox } from "hooks/useCheckbox";
+import { SURVEY_QUESTION_LIST } from "../SurveyModal";
 
 export interface IData {
   genre: string;
