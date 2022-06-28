@@ -40,22 +40,7 @@ export const SURVEY_LIST: ISurveyList[] = [
     ],
     type: "radio",
   },
-  {
-    question: "Which personality do you most aspire to?",
-    options: [
-      "RISK-TAKER, LIVES LIFE TO THE FULLEST",
-      "TOTAL ZEN",
-      "WELL-GROOMED, SOPHISTICATED",
-      "TREND-SETTER, LAID BACK",
-    ],
-    type: "radio",
-  },
   { question: "Type this code", options: [], type: "serial" },
-  // {
-  //   question: "How many stars would you rate this form?",
-  //   options: [],
-  //   type: "rate",
-  // },
   { question: "정보입력", options: [], type: "input" },
 ];
 
@@ -83,8 +68,8 @@ const Page = () => {
   };
 
   const handleNext = () => {
-    if (index > SURVEY_LIST?.length - 1) {
-      return;
+    if (index === SURVEY_LIST?.length -1) {
+      return ;
     }
     setIndex((prev) => prev + 1);
     console.log(index);
@@ -94,6 +79,7 @@ const Page = () => {
     console.log("submit");
     const timeStamp = new Date().getTime();
     setResultArray((prev) => [...prev, { id: timeStamp, ...data }]);
+    setShowModal(false);
   };
 
   const handleClose = () => {
@@ -170,7 +156,7 @@ const Page = () => {
               prev
             </Button>
             <Spacer x={"300"} />
-            {index > SURVEY_LIST?.length - 1 ? (
+            {index === SURVEY_LIST?.length - 1 ? (
               <Button onClick={handleSubmit}>Submit</Button>
             ) : (
               <Button onClick={handleNext}>next</Button>
