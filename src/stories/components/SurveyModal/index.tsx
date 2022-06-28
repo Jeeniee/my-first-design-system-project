@@ -9,6 +9,7 @@ import {
 import QuestionTemplate, { IData } from "../QuestionTemplate";
 import { SetterOrUpdater } from "recoil";
 import { useModalContext } from "store/ModalProvider";
+
 interface ISurveyList {
   question: string;
   options: string[];

@@ -39,33 +39,6 @@ interface IQuestionTemplate {
   setData: (data: IData) => void;
 }
 
-export const GENRE_LIST = [
-  {
-    value: "HORROR",
-    icon: <></>,
-  },
-  {
-    value: "COMEDY",
-    icon: <></>,
-  },
-  {
-    value: "Sci-Fi",
-    icon: <></>,
-  },
-  {
-    value: "ROMANCE",
-    icon: <></>,
-  },
-  {
-    value: "ACTION",
-    icon: <></>,
-  },
-  {
-    value: "ANIMATION",
-    icon: <></>,
-  },
-];
-
 const QuestionTemplate = ({
   index,
   type,

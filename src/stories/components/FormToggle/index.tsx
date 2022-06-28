@@ -1,9 +1,17 @@
+import React, { MouseEvent } from "react";
 import {
   ToggleButton,
   ToggleButtonGroup,
 } from "@nwaycorp/nwayplay-designsystem-fe";
-import { MouseEvent } from "react";
-import { GENRE_LIST } from "../QuestionTemplate";
+
+const GENRE_LIST = [
+  { id: "1", value: "HORROR" },
+  { id: "2", value: "COMEDY" },
+  { id: "3", value: "Sci-Fi" },
+  { id: "4", value: "ROMANCE" },
+  { id: "5", value: "ACTION" },
+  { id: "6", value: "ANIMATION" },
+];
 
 interface FormToggleProps {
   value: string;
@@ -16,9 +24,9 @@ export const FormToggle = ({ value, onChange }: FormToggleProps) => {
       value={value}
       onChange={(event, value) => onChange(event, value)}
     >
-      {GENRE_LIST.map(({ value }, index) => (
-        <ToggleButton value={value} key={`${value}_${index}`} size="l">
-          {value}
+      {GENRE_LIST.map((item) => (
+        <ToggleButton value={item?.value} key={item?.id} size="l">
+          {item?.value}
         </ToggleButton>
       ))}
     </ToggleButtonGroup>
