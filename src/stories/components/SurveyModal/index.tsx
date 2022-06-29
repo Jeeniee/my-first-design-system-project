@@ -58,7 +58,6 @@ const SurveyModal = () => {
   };
   console.log(`is editMode? ${editMode}`);
 
-
   const handleSubmit = () => {
     console.log("submit");
     setResultArray((prev) => [...prev, { ...data }]);
@@ -73,9 +72,7 @@ const SurveyModal = () => {
       ...prev.slice(editIndex + 1),
     ]);
 
-    // 리코일배열[해당인덱스]의 데이터로 교체하는 로직
-    // 모달 안에서의 로컬 state는 잘 변경되고 있으니, 마지막에 제출만 그 값으로 다시 해서 recoil 업데이트 하면 됨.
-
+    setEditMode(false);
     setShowModal(false);
     setIndex(0);
   };
