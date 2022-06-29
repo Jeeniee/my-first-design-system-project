@@ -7,26 +7,38 @@ import { surveyList } from ".";
 const ModalContext = createContext({
   showModal: false,
   setShowModal: (showModal: boolean) => {},
-  handleEdit: (index: number) => {},
+  handleEdit: (id: number) => {},
+  editIndex: 0,
+  setEditIndex: (id: number) => {},
+  editMode: false,
+  setEditMode: (prev: boolean) => {},
 });
 
 const ModalProvider = ({ children }: { children: React.ReactNode }) => {
   const { showModal, setShowModal } = useModal();
-  const [resultArray, setResultArray] = useRecoilState(surveyList);
   const [editIndex, setEditIndex] = useState<number>(0);
 
-  const data = resultArray.find((arr) => arr.id === editIndex);
-  // editIndex가 아닌 id
-  console.log(data);
+  const [editMode, setEditMode] = useState<boolean>(false);
 
-  const handleEdit = (index: number) => {
-    setEditIndex(index);
+  const handleEdit = (id: number) => {
+    setEditMode(true);
+    setEditIndex(id);
     setShowModal(true);
-    console.log(`=========${editIndex}번 인덱스 edit 요청임`);
+    console.log(`=========id :${id} edit 요청임`);
   };
 
   return (
-    <ModalContext.Provider value={{ showModal, setShowModal, handleEdit }}>
+    <ModalContext.Provider
+      value={{
+        showModal,
+        setShowModal,
+        handleEdit,
+        editIndex,
+        setEditIndex,
+        editMode,
+        setEditMode,
+      }}
+    >
       {children}
     </ModalContext.Provider>
   );
@@ -37,11 +49,3 @@ const useModalContext = () => {
 };
 
 export { ModalProvider, useModalContext };
-
-// 1. setshowModal의 parameter로 id를 전달
-// 2. 해당 id로 findIndex해서 resultArray배열 안에서의 index를 찾고
-// 3. resultArray[index]로 해당 객체의 데이터를 넣는다
-
-// 변경
-// 1. 해당 id로 findIndex해서 resultArray배열 안에서의 index를 handleEdit의 parameter로 전달하고
-// 2. resultArray[index]로 해당 객체의 데이터를 넣는다

@@ -16,6 +16,11 @@ import { useModalContext } from "store/ModalProvider";
 const GlobalNavigationBar = () => {
   const theme = useTheme();
   const { setShowModal } = useModalContext();
+
+  const onClickShowModal = () => {
+    setShowModal(true);
+  };
+
   return (
     <Fragment>
       <StyledHeader>
@@ -33,13 +38,7 @@ const GlobalNavigationBar = () => {
             </Link>
           </Stack>
         </Grid>
-        <Button
-          color="gray"
-          size="m"
-          onClick={() => {
-            setShowModal(true);
-          }}
-        >
+        <Button color="gray" size="m" onClick={onClickShowModal}>
           <Typography variant="h9">Start</Typography>
         </Button>
       </StyledHeader>

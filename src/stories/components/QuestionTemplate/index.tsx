@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect } from "react";
 import {
-  Box,
   Button,
   Checkbox,
   Image,
@@ -8,13 +7,11 @@ import {
   Spacer,
   Stack,
   TextField,
-  Transition,
   Typography,
   useSerialField,
   useTheme,
 } from "@nwaycorp/nwayplay-designsystem-fe";
 import { useRadio } from "hooks/useRadio";
-import { useSerial } from "hooks/useSerial";
 import { useTextField } from "hooks/useTextField";
 import { useToggle } from "hooks/useToggle";
 import { ChangeEvent, useState } from "react";
@@ -25,6 +22,7 @@ import { useCheckbox } from "hooks/useCheckbox";
 import { SURVEY_QUESTION_LIST } from "../SurveyModal";
 
 export interface IData {
+  id: number;
   genre: string;
   color: string;
   code: string;
@@ -78,7 +76,10 @@ const QuestionTemplate = ({
   const theme = useTheme();
 
   useEffect(() => {
+    const timeStamp = new Date().getTime();
+
     const data: IData = {
+      id: timeStamp,
       genre: selectedValue,
       color: radioValue,
       code: serial,

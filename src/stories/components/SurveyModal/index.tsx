@@ -7,7 +7,7 @@ import {
   Stack,
 } from "@nwaycorp/nwayplay-designsystem-fe";
 import QuestionTemplate, { IData } from "../QuestionTemplate";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { useModalContext } from "store/ModalProvider";
 import { surveyList } from "store/index";
 
@@ -36,16 +36,18 @@ export const SURVEY_QUESTION_LIST: ISurveyList[] = [
 const SurveyModal = () => {
   const [index, setIndex] = useState<number>(0);
   const [data, setData] = useState<IData>();
-  // console.log("모달의 data", data);
-
   const [resultArray, setResultArray] = useRecoilState(surveyList);
-  // console.log("모달의 resultArray", resultArray);
+  const {
+    showModal,
+    setShowModal,
+    editMode,
+    setEditMode,
+    editIndex,
+  } = useModalContext();
 
   const handlePrev = () => {
     setIndex((prev) => prev - 1);
-    // console.log(index);
   };
-  const { showModal, setShowModal } = useModalContext();
 
   const handleNext = () => {
     if (index > SURVEY_QUESTION_LIST?.length - 1) {
@@ -54,16 +56,32 @@ const SurveyModal = () => {
     setIndex((prev) => prev + 1);
     console.log(index);
   };
+  console.log(`is editMode? ${editMode}`);
+
 
   const handleSubmit = () => {
     console.log("submit");
-    const timeStamp = new Date().getTime();
-    setResultArray((prev) => [...prev, { id: timeStamp, ...data }]);
+    setResultArray((prev) => [...prev, { ...data }]);
+    setShowModal(false);
+    setIndex(0);
+  };
+
+  const handleEdit = () => {
+    setResultArray((prev) => [
+      ...prev.slice(0, editIndex),
+      { ...data },
+      ...prev.slice(editIndex + 1),
+    ]);
+
+    // 리코일배열[해당인덱스]의 데이터로 교체하는 로직
+    // 모달 안에서의 로컬 state는 잘 변경되고 있으니, 마지막에 제출만 그 값으로 다시 해서 recoil 업데이트 하면 됨.
+
     setShowModal(false);
     setIndex(0);
   };
 
   const handleClose = () => {
+    setEditMode(false);
     setShowModal(false);
     setIndex(0);
   };
@@ -78,7 +96,9 @@ const SurveyModal = () => {
           </Button>
           <Spacer x={"300"} />
           {index === SURVEY_QUESTION_LIST?.length - 1 ? (
-            <Button onClick={handleSubmit}>Submit</Button>
+            <Button onClick={editMode ? handleEdit : handleSubmit}>
+              Submit
+            </Button>
           ) : (
             <Button onClick={handleNext}>next</Button>
           )}

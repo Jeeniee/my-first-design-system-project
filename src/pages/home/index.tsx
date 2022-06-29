@@ -27,6 +27,9 @@ const Page = () => {
   const [resultArray, setResultArray] = useRecoilState(surveyList);
   // console.log("홈페이지의 resultArray", resultArray);
 
+  const onClickShowModal = () => {
+    setShowModal(true);
+  };
   return (
     <Fragment>
       <Grid>
@@ -55,13 +58,7 @@ const Page = () => {
                   </p>
                 </Typography>
                 <Spacer y={"500"} />
-                <Button
-                  color="gray"
-                  size="m"
-                  onClick={() => {
-                    setShowModal(true);
-                  }}
-                >
+                <Button color="gray" size="m" onClick={onClickShowModal}>
                   <Typography variant="h9">Start</Typography>
                 </Button>
               </Stack>

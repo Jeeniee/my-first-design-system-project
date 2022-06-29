@@ -20,7 +20,6 @@ const SubmitList = ({ color, genre, id, user }: any) => {
   const [resultArray, setResultArray] = useRecoilState(surveyList);
 
   const arrayIndex = resultArray.findIndex((item) => item?.id === id);
-  console.log("arrayIndex", arrayIndex);
 
   const handleDelete = () => {
     const newArr = removeIndex(resultArray, arrayIndex);
