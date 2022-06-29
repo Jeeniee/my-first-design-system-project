@@ -36,7 +36,7 @@ export const SURVEY_QUESTION_LIST: ISurveyList[] = [
 const SurveyModal = () => {
   const [index, setIndex] = useState<number>(0);
   const [data, setData] = useState<IData>();
-  const [resultArray, setResultArray] = useRecoilState(surveyList);
+  const [_, setResultArray] = useRecoilState(surveyList);
   const {
     showModal,
     setShowModal,
@@ -54,12 +54,9 @@ const SurveyModal = () => {
       return;
     }
     setIndex((prev) => prev + 1);
-    console.log(index);
   };
-  console.log(`is editMode? ${editMode}`);
 
   const handleSubmit = () => {
-    console.log("submit");
     setResultArray((prev) => [...prev, { ...data }]);
     setShowModal(false);
     setIndex(0);

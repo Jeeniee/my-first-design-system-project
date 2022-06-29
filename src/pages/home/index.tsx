@@ -24,7 +24,7 @@ import { useModalContext } from "store/ModalProvider";
 const Page = () => {
   const theme = useTheme();
   const { setShowModal } = useModalContext();
-  const [resultArray, setResultArray] = useRecoilState(surveyList);
+  const [resultArray, _] = useRecoilState(surveyList);
   // console.log("홈페이지의 resultArray", resultArray);
 
   const onClickShowModal = () => {
