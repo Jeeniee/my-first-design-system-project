@@ -8,14 +8,13 @@ interface useRadioProps {
 }
 
 export const useRadio = ({ initCheckedValue = "" }: useRadioProps) => {
-  const editModeValue = useRecoilValue(surveyList);
-  const { editMode, editIndex } = useModalContext();
+  const SurveyListArray = useRecoilValue(surveyList);
+  const { editId } = useModalContext();
 
-  const color = editModeValue[editIndex]?.color;
+  const value = SurveyListArray.find((v) => v.id === editId);
+  const result = (value && value.color) || initCheckedValue;
 
-  const [checkedValue, setCheckedValue] = useState<string>(
-    editMode && color ? color : initCheckedValue
-  );
+  const [checkedValue, setCheckedValue] = useState<string>(result);
 
   return { checkedValue, setCheckedValue };
 };

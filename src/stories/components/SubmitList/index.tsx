@@ -39,7 +39,7 @@ const SubmitList = ({ color, genre, id, user }: any) => {
           <Button
             size="s"
             color="primary"
-            onClick={() => handleEdit(arrayIndex)}
+            onClick={() => handleEdit(id)}
           >
             EDIT
           </Button>

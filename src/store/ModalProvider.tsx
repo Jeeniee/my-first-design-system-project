@@ -1,30 +1,29 @@
 import { useModal } from "hooks/useModal";
 import React, { createContext, useContext, useState } from "react";
-import { useRecoilState } from "recoil";
-import { IData } from "stories/components/QuestionTemplate";
-import { surveyList } from ".";
 
-const ModalContext = createContext({
+interface IContextType {
+  showModal: boolean;
+  setShowModal: (showModal: boolean) => void;
+  handleEdit: (id: number) => void;
+  editId: number | undefined;
+  setEditId: (index: number | undefined) => void;
+}
+
+const ModalContext = createContext<IContextType>({
   showModal: false,
-  setShowModal: (showModal: boolean) => {},
-  handleEdit: (id: number) => {},
-  editIndex: 0,
-  setEditIndex: (id: number) => {},
-  editMode: false,
-  setEditMode: (prev: boolean) => {},
+  setShowModal: () => {},
+  handleEdit: () => {},
+  editId: undefined,
+  setEditId: () => {},
 });
 
 const ModalProvider = ({ children }: { children: React.ReactNode }) => {
   const { showModal, setShowModal } = useModal();
-  const [editIndex, setEditIndex] = useState<number>(0);
-
-  const [editMode, setEditMode] = useState<boolean>(false);
+  const [editId, setEditId] = useState<number | undefined>();
 
   const handleEdit = (id: number) => {
-    setEditMode(true);
-    setEditIndex(id);
+    setEditId(id);
     setShowModal(true);
-    console.log(`=========id :${id} edit 요청임`);
   };
 
   return (
@@ -33,10 +32,8 @@ const ModalProvider = ({ children }: { children: React.ReactNode }) => {
         showModal,
         setShowModal,
         handleEdit,
-        editIndex,
-        setEditIndex,
-        editMode,
-        setEditMode,
+        editId,
+        setEditId,
       }}
     >
       {children}

@@ -4,18 +4,15 @@ import { surveyList } from "store/index";
 import { useModalContext } from "store/ModalProvider";
 
 export const useToggle = () => {
-  const editModeValue = useRecoilValue(surveyList);
-  const { editMode, editIndex } = useModalContext();
-
-  const selected = editModeValue[editIndex]?.genre;
-
-  const [selectedValue, setSelectedValue] = useState<string[]>(
-    editMode && selected ? selected : [""]
-  );
-
+  const SurveyListArray = useRecoilValue(surveyList);
+  const { editId } = useModalContext();
+  const value = SurveyListArray.find((v) => v.id === editId);
+  const result = (value && value.genre) || [""];
+  const [selectedValue, setSelectedValue] = useState<string[]>(result);
+  
   const handleToggle = (event: MouseEvent<HTMLElement>, value: string[]) => {
     event.preventDefault();
-    setSelectedValue(() => [ ...value]);
+    setSelectedValue(() => [...value]);
   };
   return { selectedValue, handleToggle };
 };

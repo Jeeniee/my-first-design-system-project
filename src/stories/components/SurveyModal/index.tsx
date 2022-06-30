@@ -7,7 +7,7 @@ import {
   Stack,
 } from "@nwaycorp/nwayplay-designsystem-fe";
 import QuestionTemplate from "../QuestionTemplate";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { useModalContext } from "store/ModalProvider";
 import { ISurveyListData, surveyList } from "store/index";
 
@@ -48,14 +48,9 @@ const initData: ISurveyListData = {
 const SurveyModal = () => {
   const [index, setIndex] = useState<number>(0);
   const [data, setData] = useState<ISurveyListData>(initData);
-  const [_, setResultArray] = useRecoilState(surveyList);
-  const {
-    showModal,
-    setShowModal,
-    editMode,
-    setEditMode,
-    editIndex,
-  } = useModalContext();
+  const [, setResultArray] = useRecoilState(surveyList);
+  const SurveyListArray = useRecoilValue(surveyList);
+  const { showModal, setShowModal, editId, setEditId } = useModalContext();
 
   const handlePrev = () => {
     setIndex((prev) => prev - 1);
@@ -75,19 +70,22 @@ const SurveyModal = () => {
   };
 
   const handleEdit = () => {
-    setResultArray((prev) => [
-      ...prev.slice(0, editIndex),
-      { ...data },
-      ...prev.slice(editIndex + 1),
-    ]);
 
-    setEditMode(false);
+    const thisIndex = SurveyListArray.findIndex((v) => v.id === editId);
+    thisIndex > -1 &&
+      setResultArray((prev) => [
+        ...prev.slice(0, thisIndex),
+        { ...data },
+        ...prev.slice(thisIndex + 1),
+      ]);
+
+    setEditId(undefined);
     setShowModal(false);
     setIndex(0);
   };
 
   const handleClose = () => {
-    setEditMode(false);
+    setEditId(undefined);
     setShowModal(false);
     setIndex(0);
   };
@@ -102,9 +100,7 @@ const SurveyModal = () => {
           </Button>
           <Spacer x={"300"} />
           {index === SURVEY_QUESTION_LIST?.length - 1 ? (
-            <Button onClick={editMode ? handleEdit : handleSubmit}>
-              Submit
-            </Button>
+            <Button onClick={editId ? handleEdit : handleSubmit}>Submit</Button>
           ) : (
             <Button onClick={handleNext}>next</Button>
           )}

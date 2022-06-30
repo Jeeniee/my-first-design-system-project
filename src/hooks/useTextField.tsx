@@ -16,13 +16,12 @@ const initTextFieldForm = {
 };
 
 export const useTextField = () => {
-  const editModeValue = useRecoilValue(surveyList);
+  const SurveyListArray = useRecoilValue(surveyList);
+  const { editId } = useModalContext();
 
-  const { editMode, editIndex } = useModalContext();
-  const user = editModeValue[editIndex]?.user;
+  const value = SurveyListArray.find((v) => v.id === editId);
+  const result = (value && value.user) || initTextFieldForm;
 
-  const [textValue, setTextValue] = useState<useTextFieldProps>(
-    editMode && user ? user : initTextFieldForm
-  );
+  const [textValue, setTextValue] = useState<useTextFieldProps>(result);
   return { textValue, setTextValue };
 };
