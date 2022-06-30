@@ -1,7 +1,5 @@
 import { useState } from "react";
-import { useRecoilValue } from "recoil";
-import { surveyList } from "store/index";
-import { useModalContext } from "store/ModalProvider";
+import { useFindData } from "./useFindData";
 
 interface useTextFieldProps {
   name: string;
@@ -16,10 +14,8 @@ const initTextFieldForm = {
 };
 
 export const useTextField = () => {
-  const SurveyListArray = useRecoilValue(surveyList);
-  const { editId } = useModalContext();
+const { value } = useFindData();
 
-  const value = SurveyListArray.find((v) => v.id === editId);
   const result = (value && value.user) || initTextFieldForm;
 
   const [textValue, setTextValue] = useState<useTextFieldProps>(result);
