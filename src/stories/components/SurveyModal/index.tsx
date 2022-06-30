@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   Button,
   Grid,
@@ -6,18 +6,18 @@ import {
   Spacer,
   Stack,
 } from "@nwaycorp/nwayplay-designsystem-fe";
-import QuestionTemplate, { IData } from "../QuestionTemplate";
-import { useRecoilState, useRecoilValue } from "recoil";
+import QuestionTemplate from "../QuestionTemplate";
+import { useRecoilState } from "recoil";
 import { useModalContext } from "store/ModalProvider";
-import { surveyList } from "store/index";
+import { ISurveyListData, surveyList } from "store/index";
 
-interface ISurveyList {
+interface IQuestionList {
   question: string;
   options: string[];
   type: "toggle" | "radio" | "serial" | "input" | "rate";
 }
 
-export const SURVEY_QUESTION_LIST: ISurveyList[] = [
+export const SURVEY_QUESTION_LIST: IQuestionList[] = [
   { question: "영화 장르 고르기", options: [], type: "toggle" },
   {
     question: "How do you wear colour?",
@@ -33,9 +33,21 @@ export const SURVEY_QUESTION_LIST: ISurveyList[] = [
   { question: "정보입력", options: [], type: "input" },
 ];
 
+const initData: ISurveyListData = {
+  code: "",
+  color: "",
+  genre: [""],
+  id: 0,
+  user: {
+    name: "",
+    email: "",
+    todays_feeling: "",
+  },
+};
+
 const SurveyModal = () => {
   const [index, setIndex] = useState<number>(0);
-  const [data, setData] = useState<IData>();
+  const [data, setData] = useState<ISurveyListData>(initData);
   const [_, setResultArray] = useRecoilState(surveyList);
   const {
     showModal,

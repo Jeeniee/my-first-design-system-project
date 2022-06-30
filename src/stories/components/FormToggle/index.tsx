@@ -14,15 +14,13 @@ const GENRE_LIST = [
 ];
 
 interface FormToggleProps {
-  value: string;
-  onChange: (event: MouseEvent<HTMLElement>, value: string) => void;
+  value: string[];
+  onChange: (event: MouseEvent<HTMLElement>, value: string[]) => void;
 }
 
 export const FormToggle = ({ value, onChange }: FormToggleProps) => {
-  // console.log("value", value);
   return (
     <ToggleButtonGroup
-      // exclusive
       value={value}
       onChange={(event, value) => onChange(event, value)}
     >

@@ -9,13 +9,13 @@ export const useToggle = () => {
 
   const selected = editModeValue[editIndex]?.genre;
 
-  const [selectedValue, setSelectedValue] = useState<string>(
-    editMode && selected ? selected : ""
+  const [selectedValue, setSelectedValue] = useState<string[]>(
+    editMode && selected ? selected : [""]
   );
 
-  const handleToggle = (event: MouseEvent<HTMLElement>, value: string) => {
+  const handleToggle = (event: MouseEvent<HTMLElement>, value: string[]) => {
     event.preventDefault();
-    setSelectedValue(() => value);
+    setSelectedValue(() => [ ...value]);
   };
   return { selectedValue, handleToggle };
 };

@@ -30,21 +30,20 @@ const viewNavigationState = atom({
   },
 });
 
-// export type userType = { name: "1"; email: "1"; todays_feeling: "1" };
-// export interface ISurveyListData {
-//   code: string;
-//   color: string;
-//   genre: string[] | string;
-//   id: number;
-//   user: userType;
-// }
+export type userType = {
+  name: string;
+  email: string;
+  todays_feeling: string;
+};
+export interface ISurveyListData {
+  code: string;
+  color: string;
+  genre: string[];
+  id: number;
+  user: userType;
+}
 
-// const surveyList = atom<ISurveyListData[]>({
-//   key: "surveyList",
-//   default: [],
-// });
-
-const surveyList = atom<any[]>({
+const surveyList = atom<ISurveyListData[]>({
   key: "surveyList",
   default: [],
 });

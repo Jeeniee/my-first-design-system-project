@@ -23,7 +23,7 @@ import { SURVEY_QUESTION_LIST } from "../SurveyModal";
 
 export interface IData {
   id: number;
-  genre: string;
+  genre: string[];
   color: string;
   code: string;
   user: { name: string; email: string; todays_feeling: string };
