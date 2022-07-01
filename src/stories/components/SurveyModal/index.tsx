@@ -7,9 +7,10 @@ import {
   Stack,
 } from "@nwaycorp/nwayplay-designsystem-fe";
 import QuestionTemplate from "../QuestionTemplate";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 import { useModalContext } from "store/ModalProvider";
 import { ISurveyListData, surveyList } from "store/index";
+import { useFindDataIndex } from "hooks/usefindIndex";
 
 interface IQuestionList {
   question: string;
@@ -49,8 +50,8 @@ const SurveyModal = () => {
   const [index, setIndex] = useState<number>(0);
   const [data, setData] = useState<ISurveyListData>(initData);
   const [, setResultArray] = useRecoilState(surveyList);
-  const SurveyListArray = useRecoilValue(surveyList);
   const { showModal, setShowModal, editId, setEditId } = useModalContext();
+  const { arrayIndex } = useFindDataIndex(editId!);
 
   const handlePrev = () => {
     setIndex((prev) => prev - 1);
@@ -70,13 +71,11 @@ const SurveyModal = () => {
   };
 
   const handleEdit = () => {
-
-    const thisIndex = SurveyListArray.findIndex((v) => v.id === editId);
-    thisIndex > -1 &&
+    arrayIndex > -1 &&
       setResultArray((prev) => [
-        ...prev.slice(0, thisIndex),
+        ...prev.slice(0, arrayIndex),
         { ...data },
-        ...prev.slice(thisIndex + 1),
+        ...prev.slice(arrayIndex + 1),
       ]);
 
     setEditId(undefined);

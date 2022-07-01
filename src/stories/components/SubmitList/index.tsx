@@ -1,6 +1,5 @@
 import React from "react";
 import {
-  Box,
   Button,
   Spacer,
   Stack,
@@ -12,23 +11,18 @@ import { StyledListStack } from "./style";
 import { useModalContext } from "store/ModalProvider";
 import { useRecoilState } from "recoil";
 import { surveyList } from "store/index";
-import { IData } from "../QuestionTemplate";
+import { useDelete } from "hooks/useDelete";
 
 const SubmitList = ({ color, genre, id, user }: any) => {
   const theme = useTheme();
   const { handleEdit } = useModalContext();
-  const [resultArray, setResultArray] = useRecoilState(surveyList);
-
-  const arrayIndex = resultArray.findIndex((item) => item?.id === id);
+  const [_, setResultArray] = useRecoilState(surveyList);
+  const { newArr } = useDelete(id);
 
   const handleDelete = () => {
-    const newArr = removeIndex(resultArray, arrayIndex);
     setResultArray(newArr);
   };
 
-  const removeIndex = (arr: IData[], index: number) => {
-    return [...arr.slice(0, index), ...arr.slice(index + 1)];
-  };
   return (
     <StyledListStack theme={theme}>
       <Stack direction="row" justifyContent="space-between">
@@ -36,11 +30,7 @@ const SubmitList = ({ color, genre, id, user }: any) => {
           <Typography variant="body8">List ID : {id}</Typography>
         </Stack>
         <Stack direction="row" justifyContent="flex-end">
-          <Button
-            size="s"
-            color="primary"
-            onClick={() => handleEdit(id)}
-          >
+          <Button size="s" color="primary" onClick={() => handleEdit(id)}>
             EDIT
           </Button>
           <Spacer x={"500"} />
